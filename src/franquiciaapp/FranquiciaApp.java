@@ -9,8 +9,6 @@ package franquiciaapp;
  * @author daniel
  */
 public class FranquiciaApp {
-    
-    private String ip_nodo_siguiente;
 
     /**
      * @param args the command line arguments
