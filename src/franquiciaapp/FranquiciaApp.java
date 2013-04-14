@@ -17,5 +17,8 @@ public class FranquiciaApp {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        RegistroProducto Registro = new RegistroProducto();
+        Registro.setVisible(true);
+
     }
 }
