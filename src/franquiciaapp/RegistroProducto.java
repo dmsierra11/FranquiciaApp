@@ -46,7 +46,6 @@ public class RegistroProducto extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         examinar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jFileChooser1 = new javax.swing.JFileChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -135,8 +134,6 @@ public class RegistroProducto extends javax.swing.JFrame {
         jLabel2.setText("jLabel2");
         jLabel2.setBounds(-5, 0, 600, 370);
         jLayeredPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jFileChooser1.setBounds(30, 0, 550, 400);
-        jLayeredPane1.add(jFileChooser1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -229,7 +226,7 @@ public class RegistroProducto extends javax.swing.JFrame {
 
     private void examinarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_examinarMouseClicked
         // TODO add your handling code here:
-        this.jFileChooser1.isVisible();
+        
     }//GEN-LAST:event_examinarMouseClicked
 
     /**
@@ -271,7 +268,6 @@ public class RegistroProducto extends javax.swing.JFrame {
     private javax.swing.JTextField costo;
     private javax.swing.JTextField descripcion;
     private javax.swing.JButton examinar;
-    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
