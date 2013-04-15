@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 
 /**
- *
+ *clase que permite el registro de los productos en la franquicia
  * @author gracielalucena
  */
 public class RegistroProducto extends javax.swing.JFrame {
@@ -16,6 +16,9 @@ public class RegistroProducto extends javax.swing.JFrame {
     /**
      * Creates new form RegistroProducto
      */
+            private String vacio = null;
+
+    
     public RegistroProducto() {
         initComponents();
     }
@@ -40,7 +43,10 @@ public class RegistroProducto extends javax.swing.JFrame {
         descripcion = new javax.swing.JTextField();
         costo = new javax.swing.JTextField();
         registrar = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        examinar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jFileChooser1 = new javax.swing.JFileChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -50,7 +56,6 @@ public class RegistroProducto extends javax.swing.JFrame {
         jLabel3.setText("Logo");
         jLabel3.setBounds(320, 50, 90, 100);
         jLayeredPane1.add(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLabel3.getAccessibleContext().setAccessibleName("Logo");
 
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel4.setText("Nombre:");
@@ -104,10 +109,34 @@ public class RegistroProducto extends javax.swing.JFrame {
         registrar.setBounds(220, 310, 97, 29);
         jLayeredPane1.add(registrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jTextField1.setBounds(240, 230, 150, 28);
+        jLayeredPane1.add(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        examinar.setText("...");
+        examinar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                examinarMouseClicked(evt);
+            }
+        });
+        examinar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                examinarActionPerformed(evt);
+            }
+        });
+        examinar.setBounds(400, 230, 40, 30);
+        jLayeredPane1.add(examinar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/fondos-verdes.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
         jLabel2.setBounds(-5, 0, 600, 370);
         jLayeredPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jFileChooser1.setBounds(30, 0, 550, 400);
+        jLayeredPane1.add(jFileChooser1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,7 +150,7 @@ public class RegistroProducto extends javax.swing.JFrame {
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .add(jLayeredPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 364, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 0, Short.MAX_VALUE))
+                .add(0, 22, Short.MAX_VALUE))
         );
 
         pack();
@@ -137,6 +166,17 @@ public class RegistroProducto extends javax.swing.JFrame {
 
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
         // TODO add your handling code here:
+        if ((this.nombre.getText().equals("")) || (this.descripcion.getText().equals("")) || (this.costo.getText().equals("")))
+                {
+            JOptionPane.showMessageDialog(null, "Algun campo esta VACIO", "ERROR", JOptionPane.ERROR_MESSAGE);
+            RegistroProducto Registro = new RegistroProducto();
+            Registro.setVisible(true);
+            
+        }
+        
+        else{
+        
+        
          XMLProducto productos = new XMLProducto();
         boolean flag = productos.agregarProducto(this.nombre.getText(), this.descripcion.getText(), this.costo.getText());
         if (flag= false){
@@ -148,12 +188,12 @@ public class RegistroProducto extends javax.swing.JFrame {
             Registro.setVisible(true);
             this.dispose();
         }else{
-                File folder = new File("../FranquiciaApp/"+this.nombre.getText());
-                folder.mkdir();
-                String nombrearchivo ="listaProductos.xml";
+                //File folder = new File("../FranquiciaApp/"+this.nombre.getText());
+                //folder.mkdir();
+                //String nombrearchivo ="listaProductos.xml";
                // XMLCliente.archivoNuevo(nombrearchivo);
-                RegistroProducto Registro = new RegistroProducto();
-                Registro.setVisible(true);
+                GestionProducto Gestion = new GestionProducto();
+                Gestion.setVisible(true);
                 this.dispose();
                 JOptionPane.showMessageDialog(null, "Producto creado correctamente", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
              
@@ -176,8 +216,21 @@ public class RegistroProducto extends javax.swing.JFrame {
                 
             
         
-
+        }
     }//GEN-LAST:event_registrarActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void examinarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examinarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_examinarActionPerformed
+
+    private void examinarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_examinarMouseClicked
+        // TODO add your handling code here:
+        this.jFileChooser1.isVisible();
+    }//GEN-LAST:event_examinarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -217,6 +270,8 @@ public class RegistroProducto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField costo;
     private javax.swing.JTextField descripcion;
+    private javax.swing.JButton examinar;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -225,6 +280,7 @@ public class RegistroProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField nombre;
     private javax.swing.JButton registrar;
     // End of variables declaration//GEN-END:variables
