@@ -1,1 +1,13 @@
-<root />
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<root>
+  <producto>
+    <nombre>Harina</nombre>
+    <descripcion>Harina Pan</descripcion>
+    <costo>11</costo>
+  </producto>
+</root>
+
