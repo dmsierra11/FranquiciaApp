@@ -1,1 +1,12 @@
-<root />
+<root>
+  <producto>
+    <nombre>Harina</nombre>
+    <descripcion>Harina Juana</descripcion>
+    <costo>15</costo>
+  </producto>
+  <producto>
+    <nombre>Azucar</nombre>
+    <descripcion>Azucar Morena</descripcion>
+    <costo>18</costo>
+  </producto>
+</root>

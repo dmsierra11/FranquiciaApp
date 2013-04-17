@@ -68,12 +68,12 @@ public class RegistroProducto extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel6.setText("Imagen: ");
-        jLabel6.setBounds(150, 240, 60, 16);
+        jLabel6.setBounds(150, 240, 60, 18);
         jLayeredPane1.add(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel7.setText("Costo:");
-        jLabel7.setBounds(150, 270, 45, 16);
+        jLabel7.setBounds(150, 270, 45, 18);
         jLayeredPane1.add(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
@@ -86,7 +86,7 @@ public class RegistroProducto extends javax.swing.JFrame {
                 nombreActionPerformed(evt);
             }
         });
-        nombre.setBounds(240, 160, 90, 20);
+        nombre.setBounds(240, 160, 120, 20);
         jLayeredPane1.add(nombre, javax.swing.JLayeredPane.DEFAULT_LAYER);
         descripcion.setBounds(240, 200, 200, 20);
         jLayeredPane1.add(descripcion, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -105,7 +105,7 @@ public class RegistroProducto extends javax.swing.JFrame {
                 registrarActionPerformed(evt);
             }
         });
-        registrar.setBounds(220, 310, 97, 29);
+        registrar.setBounds(220, 310, 97, 23);
         jLayeredPane1.add(registrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -113,7 +113,7 @@ public class RegistroProducto extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
-        jTextField1.setBounds(240, 230, 150, 28);
+        jTextField1.setBounds(240, 230, 150, 20);
         jLayeredPane1.add(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         examinar.setText("...");

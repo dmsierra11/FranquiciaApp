@@ -9,21 +9,28 @@ package franquiciaapp;
  * @author gracielalucena
  */
 public class Producto {
-    
+
     private String nombre;
     private String descripcion;
     private String costo;
-    
-     public Producto() {
+    private String foto;
+
+    public Producto() {
     }
-     
+
     public Producto(String nombre, String descripcion, String costo) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.costo = costo;
     }
-    
-      public String getNombre() {
+
+    public Producto(String nombre, String descripcion, String foto, String costo) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.costo = costo;
+    }
+
+    public String getNombre() {
         return nombre;
     }
 
@@ -47,5 +54,11 @@ public class Producto {
         this.costo = costo;
     }
 
-    
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 }

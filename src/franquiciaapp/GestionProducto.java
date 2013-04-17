@@ -8,8 +8,8 @@ import java.io.File;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *Clase que permite la visualizacion y eliminacion
- * de los productos
+ * Clase que permite la visualizacion y eliminacion de los productos
+ *
  * @author gracielalucena
  */
 public class GestionProducto extends javax.swing.JFrame {
@@ -21,10 +21,8 @@ public class GestionProducto extends javax.swing.JFrame {
     private String archivo = "listaProductos.xml";
     private String producto;
 
-    
     public GestionProducto() {
         initComponents();
-        
         XMLProducto xml = new XMLProducto();
         xml.listarProductos(this, archivo);
     }
@@ -42,25 +40,30 @@ public class GestionProducto extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         gestor = new javax.swing.JTable();
         eliminar = new javax.swing.JButton();
+        jBModificar = new javax.swing.JButton();
+        jBCrear = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLayeredPane1.setLocation(new java.awt.Point(0, 0));
-
         gestor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Producto", "Descripcion", "Foto", "Costo"
+                "Nombre", "Descripcion", "Imagen", "Costo"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(gestor);
 
         jScrollPane1.setBounds(50, 100, 490, 150);
@@ -68,14 +71,36 @@ public class GestionProducto extends javax.swing.JFrame {
 
         eliminar.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
         eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/delete.png"))); // NOI18N
-        eliminar.setText("Eliminar.");
+        eliminar.setText("Eliminar");
         eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eliminarActionPerformed(evt);
             }
         });
-        eliminar.setBounds(400, 270, 140, 60);
+        eliminar.setBounds(420, 270, 120, 60);
         jLayeredPane1.add(eliminar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jBModificar.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
+        jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/edit.png"))); // NOI18N
+        jBModificar.setText("Modificar");
+        jBModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBModificarActionPerformed(evt);
+            }
+        });
+        jBModificar.setBounds(260, 270, 130, 60);
+        jLayeredPane1.add(jBModificar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jBCrear.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
+        jBCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/new.png"))); // NOI18N
+        jBCrear.setText("Nuevo Producto");
+        jBCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCrearActionPerformed(evt);
+            }
+        });
+        jBCrear.setBounds(60, 270, 170, 60);
+        jLayeredPane1.add(jBCrear, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/carrinho supermercado.png"))); // NOI18N
         jLabel1.setBounds(210, 0, 90, 100);
@@ -83,7 +108,7 @@ public class GestionProducto extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel2.setText("SuperMercados XYZ");
-        jLabel2.setBounds(50, 60, 184, 22);
+        jLabel2.setBounds(50, 60, 177, 24);
         jLayeredPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/fondos-verdes.jpg"))); // NOI18N
@@ -104,50 +129,61 @@ public class GestionProducto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
     /**
-     * Permite eliminar los productos, que seleccione en la lista
-     * dinamica
-     * @param evt 
+     * Permite eliminar los productos, que seleccione en la lista dinamica
+     *
+     * @param evt
      */
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
         // TODO add your handling code here:
         System.out.print("estoy aqui");
-                System.out.print(selected);
+        System.out.print(selected);
 
         selected = gestor.getSelectedRow();
-        
-                System.out.print(gestor.getSelectedRow());
-         if (selected >= 0) {
+
+        System.out.print(gestor.getSelectedRow());
+        if (selected >= 0) {
             String nombrearchivo = (String) gestor.getValueAt(selected, 0);
             System.out.print(nombrearchivo);
-               //File archivo = new File(this.carpetausuario + "/" + nombrearchivo);
-            
-           // XMLnodos xmlnodo = new XMLnodos();
+            //File archivo = new File(this.carpetausuario + "/" + nombrearchivo);
+
+            // XMLnodos xmlnodo = new XMLnodos();
             //int var=0;
             //for (int i = 0; i < xmlnodo.cantNodos(); i++) {
-             
-              //  var=xmlnodo.cargaArchivos(i);
-               // HiloReplicador hiloReplicador;
-                // OJO EL 1200 ES EL PUERTO DE ENVIAR, EL DE ESCUCHA SE ESTA USANDO POR ARGUMENTO
-              //if(var==1){
-               // hiloReplicador = new HiloReplicador(Datos.getIp_vecino(), Datos.getPuerto_entrada(),Datos.getPuerto_salida(),archivo, this.carpetausuario,"eliminar");
-                // hiloReplicador.start();
-              //}
-               XMLProducto xml = new XMLProducto();
-               xml.borrarProducto(archivo,nombrearchivo);
-              //archivo.delete();
 
-        // TODO add your handling code here:
-        // }
-                            ((DefaultTableModel) this.gestor.getModel()).removeRow(selected);
+            //  var=xmlnodo.cargaArchivos(i);
+            // HiloReplicador hiloReplicador;
+            // OJO EL 1200 ES EL PUERTO DE ENVIAR, EL DE ESCUCHA SE ESTA USANDO POR ARGUMENTO
+            //if(var==1){
+            // hiloReplicador = new HiloReplicador(Datos.getIp_vecino(), Datos.getPuerto_entrada(),Datos.getPuerto_salida(),archivo, this.carpetausuario,"eliminar");
+            // hiloReplicador.start();
+            //}
+            XMLProducto xml = new XMLProducto();
+            xml.borrarProducto(archivo, nombrearchivo);
+            //archivo.delete();
 
-         }
-         else
-             System.out.print("AHORA ACA");
-                         System.out.print(selected);
+            // TODO add your handling code here:
+            // }
+            ((DefaultTableModel) this.gestor.getModel()).removeRow(selected);
+
+        } else {
+            System.out.print("AHORA ACA");
+        }
+        System.out.print(selected);
 
     }//GEN-LAST:event_eliminarActionPerformed
+
+    private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
+
+        ActualizarProducto ventanaActualizar = new ActualizarProducto(this);
+        ventanaActualizar.setVisible(true);
+
+    }//GEN-LAST:event_jBModificarActionPerformed
+
+    private void jBCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCrearActionPerformed
+        RegistroProducto Registro = new RegistroProducto();
+        Registro.setVisible(true);
+    }//GEN-LAST:event_jBCrearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,36 +219,50 @@ public class GestionProducto extends javax.swing.JFrame {
             }
         });
     }
-    
+
     /**
      * Carga la tabla con los productos disponibles
+     *
      * @param nombre
      * @param descripcion
      * @param foto
-     * @param costo 
+     * @param costo
      */
-     public void agregarfila(String nombre, String descripcion, String foto, String costo) {
+    public void agregarfila(String nombre, String descripcion, String foto, String costo) {
         ((DefaultTableModel) this.gestor.getModel()).addRow(new Object[]{nombre, descripcion, foto, costo});
-    
+
     }
-     
-      public int getRowCount() {
+
+    public Producto getProductoSeleccionado() {
+        int selectedRow = this.gestor.getSelectedRow();
+        String productoNombre = (String) this.gestor.getModel().getValueAt(selectedRow, 0);
+        String productoDesc = (String) this.gestor.getModel().getValueAt(selectedRow, 1);
+        String productoFoto = (String) this.gestor.getModel().getValueAt(selectedRow, 2);
+        String productoCosto = (String) this.gestor.getModel().getValueAt(selectedRow, 3);
+
+        Producto product = new Producto(productoNombre, productoDesc, productoFoto,
+                productoCosto);
+
+        return product;
+    }
+
+    public int getRowCount() {
         return gestor.getRowCount();
     }
-     
-     private void gestorMouseClicked(java.awt.event.MouseEvent evt) {                                    
 
-              this.selected = gestor.getSelectedRow();
-                              System.out.print(selected);
+    private void gestorMouseClicked(java.awt.event.MouseEvent evt) {
+        this.selected = gestor.getSelectedRow();
+        System.out.print(selected);
 
- 
-             // TODO add your handling code here:
+
         // TODO add your handling code here:
-    }              
-    
+        // TODO add your handling code here:
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton eliminar;
     private javax.swing.JTable gestor;
+    private javax.swing.JButton jBCrear;
+    private javax.swing.JButton jBModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

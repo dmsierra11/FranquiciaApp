@@ -17,23 +17,22 @@ import org.jdom.output.*;
  * @author gracielalucena
  */
 public class XMLProducto {
-    
-        private Element root;
+
+    private Element root;
 
     /**
      * escribe en el XML los productos registrados en sistema
+     *
      * @param nombre
      * @param descripcion
      * @param costo
-     * @return 
+     * @return
      */
-    public static boolean agregarProducto(String nombre,String descripcion, String costo)
-    {
-        Document    doc;
-        Element     root, elProducto, elNombre, laDescripcion, elPrecio;
-        SAXBuilder  builder = new SAXBuilder();
-        try
-        {
+    public static boolean agregarProducto(String nombre, String descripcion, String costo) {
+        Document doc;
+        Element root, elProducto, elNombre, laDescripcion, elPrecio;
+        SAXBuilder builder = new SAXBuilder();
+        try {
             doc = builder.build("listaProductos.xml");
             root = doc.getRootElement();
             // Creamos una nueva etiqueta
@@ -41,7 +40,7 @@ public class XMLProducto {
             elNombre = new Element("nombre");
             laDescripcion = new Element("descripcion");
             elPrecio = new Element("costo");
-            
+
             root.addContent(elProducto);
             elProducto.addContent(elNombre);
             elNombre.addContent(nombre);
@@ -49,52 +48,43 @@ public class XMLProducto {
             laDescripcion.addContent(descripcion);
             elProducto.addContent(elPrecio);
             elPrecio.addContent(costo);
-           
-            try
-            {
+
+            try {
                 Format format = Format.getPrettyFormat();
                 /* Se genera un flujo de salida de datos XML */
                 XMLOutputter out = new XMLOutputter(format);
                 /* Se asocia el flujo de salida con el archivo donde se guardaran los datos */
                 FileOutputStream file = new FileOutputStream("listaProductos.xml");
                 /* Se manda el documento generado hacia el archivo XML */
-                out.output(doc,file);
+                out.output(doc, file);
                 /* Se limpia el buffer ocupado por el objeto file y se manda a cerrar el archivo */
                 file.flush();
                 file.close();
-            }
-            catch(Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-        catch(JDOMParseException e)
-        {
+        } catch (JDOMParseException e) {
             System.out.println("Error loading XML file - The file is empty1");
             e.printStackTrace();
-        }
-        catch(JDOMException e)
-        {
+        } catch (JDOMException e) {
             System.out.println("Error loading XML file - The file is empty2");
             e.printStackTrace();
-        }
-        catch(IOException e)
-        {
+        } catch (IOException e) {
             System.out.println("Error loading XML file - The file is empty3");
             e.printStackTrace();
         }
 
         return true;
     }
-    
+
     //Listar productos 
     /**
      * Lista los productos que se encuentran en el .XML
+     *
      * @param ventana
-     * @param archivo 
+     * @param archivo
      */
-    
-     public void listarProductos(GestionProducto ventana, String archivo) {
+    public void listarProductos(GestionProducto ventana, String archivo) {
         try {
             SAXBuilder builder = new SAXBuilder(false);
             //System.out.println(usuario);
@@ -109,8 +99,8 @@ public class XMLProducto {
                 Element descripcion = e.getChild("descripcion");
 
                 Element costo = e.getChild("costo");
-               // if (archivo.equals(user.getText())) {
-                    ventana.agregarfila(nombre.getText(), descripcion.getText(), costo.getText(), costo.getText());
+                // if (archivo.equals(user.getText())) {
+                ventana.agregarfila(nombre.getText(), descripcion.getText(), costo.getText(), costo.getText());
                 //}
 
             }
@@ -121,10 +111,11 @@ public class XMLProducto {
         }
         //return Varchivo;
     }
-     
+
     /**
      * Modifica el XML
-     * @return 
+     *
+     * @return
      */
     private boolean updateDocument() {
         try {
@@ -139,16 +130,17 @@ public class XMLProducto {
             return false;
         }
     }
-     
+
     /**
      * Borra el producto del XML
+     *
      * @param archivo
      * @param producto
-     * @return 
+     * @return
      */
     public boolean borrarProducto(String archivo, String producto) {
         SAXBuilder builder = new SAXBuilder(false);
-            Document doc = null;
+        Document doc = null;
         try {
             doc = builder.build("listaProductos.xml");
         } catch (JDOMException ex) {
@@ -156,8 +148,8 @@ public class XMLProducto {
         } catch (IOException ex) {
             Logger.getLogger(XMLProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
-            root = doc.getRootElement(); 
-       boolean resultado = false;
+        root = doc.getRootElement();
+        boolean resultado = false;
         Element aux = new Element("producto");
         List Productos = this.root.getChildren("producto");
         while (aux != null) {
@@ -170,24 +162,59 @@ public class XMLProducto {
         return resultado;
     }
 
-       /**
-        * Permite la busqueda en el XML
-        * @param raiz
-        * @param archivo
-        * @param producto
-        * @return 
-        */
-   public static Element buscar(List raiz, String archivo, String producto) {
-        Iterator i = raiz.iterator(); 
+    /**
+     * Permite la busqueda en el XML
+     *
+     * @param raiz
+     * @param archivo
+     * @param producto
+     * @return
+     */
+    public static Element buscar(List raiz, String archivo, String producto) {
+        Iterator i = raiz.iterator();
         while (i.hasNext()) {
             Element elemento = (Element) i.next();
-            if (producto.equals(elemento.getChild("nombre").getText()) ) {
+            if (producto.equals(elemento.getChild("nombre").getText())) {
                 return elemento;
             }
         }
         return null;
     }
 
-     
-    
+    public boolean actualizarProducto(String nombreOrig, String nombreP, String descripcionP, String costoP) {
+        try {
+            SAXBuilder builder = new SAXBuilder(false);
+            //System.out.println(usuario);
+            Document doc = builder.build("listaProductos.xml");
+            Element raiz = doc.getRootElement();
+            List listaProducto = raiz.getChildren("producto");
+            Iterator k = listaProducto.iterator();
+            while (k.hasNext()) {
+                int i = 0, j = 0;
+                Element e = (Element) k.next();
+                Element nombre = e.getChild("nombre");
+                if (nombre.getText().equalsIgnoreCase(nombreOrig)) {
+                    Element descripcion = e.getChild("descripcion");
+                    Element costo = e.getChild("costo");
+                    
+                    nombre.setText(nombreP);
+                    descripcion.setText(descripcionP);
+                    costo.setText(costoP);
+                    
+                    System.out.println(descripcion.getText());
+
+                }
+
+                XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
+                xmlOutputter.output(doc, new FileOutputStream("listaProductos.xml"));
+
+            }
+        } catch (FileNotFoundException F) {
+            System.out.println("Archivo XML no encontrado");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
 }
