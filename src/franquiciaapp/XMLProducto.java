@@ -30,7 +30,7 @@ public class XMLProducto {
      */
     public static boolean agregarProducto(String nombre, String descripcion, String costo) {
         Document doc;
-        Element root, elProducto, elNombre, laDescripcion, elPrecio;
+        Element root, elProducto, elNombre, laDescripcion, elPrecio, elStatus;
         SAXBuilder builder = new SAXBuilder();
         try {
             doc = builder.build("listaProductos.xml");
@@ -40,6 +40,7 @@ public class XMLProducto {
             elNombre = new Element("nombre");
             laDescripcion = new Element("descripcion");
             elPrecio = new Element("costo");
+            elStatus = new Element("status");
 
             root.addContent(elProducto);
             elProducto.addContent(elNombre);
@@ -48,6 +49,8 @@ public class XMLProducto {
             laDescripcion.addContent(descripcion);
             elProducto.addContent(elPrecio);
             elPrecio.addContent(costo);
+            elProducto.addContent(elStatus);
+            elStatus.addContent("Activo");
 
             try {
                 Format format = Format.getPrettyFormat();
@@ -99,8 +102,9 @@ public class XMLProducto {
                 Element descripcion = e.getChild("descripcion");
 
                 Element costo = e.getChild("costo");
+                Element status = e.getChild("status");
                 // if (archivo.equals(user.getText())) {
-                ventana.agregarfila(nombre.getText(), descripcion.getText(), costo.getText(), costo.getText());
+                ventana.agregarfila(nombre.getText(), descripcion.getText(), costo.getText(), costo.getText(), status.getText());
                 //}
 
             }
@@ -181,7 +185,19 @@ public class XMLProducto {
         return null;
     }
 
-    public boolean actualizarProducto(String nombreOrig, String nombreP, String descripcionP, String costoP) {
+    /**
+     * Actualiza el producto en el xml.
+     *
+     * Busca el producto por su nombre y sobreescribe todos los campos por los
+     * que se pasan de la ventana anterior.
+     *
+     * @param nombreOrig
+     * @param nombreP
+     * @param descripcionP
+     * @param costoP
+     * @return
+     */
+    public boolean actualizarProducto(String nombreOrig, String nombreP, String descripcionP, String costoP, String status) {
         try {
             SAXBuilder builder = new SAXBuilder(false);
             //System.out.println(usuario);
@@ -196,12 +212,20 @@ public class XMLProducto {
                 if (nombre.getText().equalsIgnoreCase(nombreOrig)) {
                     Element descripcion = e.getChild("descripcion");
                     Element costo = e.getChild("costo");
-                    
+
                     nombre.setText(nombreP);
                     descripcion.setText(descripcionP);
                     costo.setText(costoP);
-                    
-                    System.out.println(descripcion.getText());
+
+                    if (e.getChild("status") != null) {
+                        e.getChild("status").setText(status);
+                    } else {
+                        Element estatus = new Element("status");
+                        estatus.addContent(status);
+                        e.addContent(estatus);
+                    }
+
+                    //System.out.println(descripcion.getText());
 
                 }
 
@@ -217,4 +241,5 @@ public class XMLProducto {
 
         return true;
     }
+
 }

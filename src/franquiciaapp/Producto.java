@@ -14,9 +14,7 @@ public class Producto {
     private String descripcion;
     private String costo;
     private String foto;
-
-    public Producto() {
-    }
+    private String status;
 
     public Producto(String nombre, String descripcion, String costo) {
         this.nombre = nombre;
@@ -24,10 +22,12 @@ public class Producto {
         this.costo = costo;
     }
 
-    public Producto(String nombre, String descripcion, String foto, String costo) {
+    public Producto(String nombre, String descripcion, String foto, String costo, String status) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.costo = costo;
+        this.foto = foto;
+        this.status = status;
     }
 
     public String getNombre() {
@@ -60,5 +60,13 @@ public class Producto {
 
     public void setFoto(String foto) {
         this.foto = foto;
+    }
+    
+     public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

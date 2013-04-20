@@ -16,8 +16,8 @@ public class FranquiciaApp {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        GestionProducto menuProductos = new GestionProducto();
-        menuProductos.setVisible(true);
+        MenuFranquicia menu = new MenuFranquicia();
+        menu.setVisible(true);
 
     }
 }

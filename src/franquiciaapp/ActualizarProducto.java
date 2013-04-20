@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package franquiciaapp;
 
 import java.io.File;
@@ -9,9 +5,9 @@ import javax.swing.JOptionPane;
 import javax.swing.*;
 
 /**
- * clase que permite el registro de los productos en la franquicia
+ * Clase que permite la actualización de datos de los productos en la franquicia.
  *
- * @author gracielalucena
+ * @author daniel
  */
 public class ActualizarProducto extends javax.swing.JFrame {
 
@@ -49,6 +45,8 @@ public class ActualizarProducto extends javax.swing.JFrame {
         jLDescripcion = new javax.swing.JLabel();
         jLImagen = new javax.swing.JLabel();
         jLCosto = new javax.swing.JLabel();
+        jLStatus = new javax.swing.JLabel();
+        jCBStatus = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jTNombre = new javax.swing.JTextField();
         jTDescripcion = new javax.swing.JTextField();
@@ -88,6 +86,15 @@ public class ActualizarProducto extends javax.swing.JFrame {
         jLCosto.setBounds(150, 280, 45, 18);
         jLayeredPane1.add(jLCosto, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        jLStatus.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLStatus.setText("Estatus:");
+        jLStatus.setBounds(150, 320, 50, 18);
+        jLayeredPane1.add(jLStatus, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jCBStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Activo", "Inactivo" }));
+        jCBStatus.setBounds(240, 320, 90, 20);
+        jLayeredPane1.add(jCBStatus, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setText("SuperMercados XYZ");
         jLabel1.setBounds(130, 100, 200, 30);
@@ -117,7 +124,7 @@ public class ActualizarProducto extends javax.swing.JFrame {
                 jBActualizarActionPerformed(evt);
             }
         });
-        jBActualizar.setBounds(200, 320, 97, 23);
+        jBActualizar.setBounds(220, 360, 97, 23);
         jLayeredPane1.add(jBActualizar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jBCancelar.setText("Cancelar");
@@ -126,7 +133,7 @@ public class ActualizarProducto extends javax.swing.JFrame {
                 jBCancelarActionPerformed(evt);
             }
         });
-        jBCancelar.setBounds(320, 320, 97, 23);
+        jBCancelar.setBounds(340, 360, 97, 23);
         jLayeredPane1.add(jBCancelar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jTImagen.addActionListener(new java.awt.event.ActionListener() {
@@ -153,20 +160,18 @@ public class ActualizarProducto extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/fondos-verdes.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
-        jLabel2.setBounds(-5, 0, 600, 390);
+        jLabel2.setBounds(0, 0, 650, 420);
         jLayeredPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .add(jLayeredPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 593, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 0, Short.MAX_VALUE))
+            .add(jLayeredPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jLayeredPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 364, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(jLayeredPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
         );
 
         pack();
@@ -189,7 +194,9 @@ public class ActualizarProducto extends javax.swing.JFrame {
 
         } else {
             XMLProducto productos = new XMLProducto();
-            boolean flag = productos.actualizarProducto(this.producto, this.jTNombre.getText(), this.jTDescripcion.getText(), this.jTCosto.getText());
+            boolean flag = productos.actualizarProducto(this.producto, this.jTNombre.getText(),
+                    this.jTDescripcion.getText(), this.jTCosto.getText(), 
+                    this.jCBStatus.getSelectedItem().toString());
             if (flag = false) {
                 JOptionPane.showMessageDialog(null, "No se pudo crear usuario", "ERROR", JOptionPane.ERROR_MESSAGE);
                 ActualizarProducto Registro = new ActualizarProducto();
@@ -200,10 +207,11 @@ public class ActualizarProducto extends javax.swing.JFrame {
                 //folder.mkdir();
                 //String nombrearchivo ="listaProductos.xml";
                 // XMLCliente.archivoNuevo(nombrearchivo);
+                this.padre.dispose();
                 GestionProducto Gestion = new GestionProducto();
                 Gestion.setVisible(true);
                 this.dispose();
-                JOptionPane.showMessageDialog(null, "Producto creado correctamente", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Producto modificado correctamente", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
 
                 //XMLnodos xmlnodo = new XMLnodos();
                 //int var=0;
@@ -278,6 +286,9 @@ public class ActualizarProducto extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Inicializa los componentes principales de la ventana
+     */
     private void inicializar() {
         Producto productoSelec = this.padre.getProductoSeleccionado();
         this.producto = productoSelec.getNombre();
@@ -285,16 +296,20 @@ public class ActualizarProducto extends javax.swing.JFrame {
         jTDescripcion.setText(productoSelec.getDescripcion());
         jTCosto.setText(productoSelec.getCosto());
         jTImagen.setText(productoSelec.getFoto());
+        System.out.println(productoSelec.getStatus());
+        jCBStatus.setSelectedItem(productoSelec.getStatus());
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton examinar;
     private javax.swing.JButton jBActualizar;
     private javax.swing.JButton jBCancelar;
+    private javax.swing.JComboBox jCBStatus;
     private javax.swing.JLabel jLCosto;
     private javax.swing.JLabel jLDescripcion;
     private javax.swing.JLabel jLImagen;
     private javax.swing.JLabel jLNombre;
+    private javax.swing.JLabel jLStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

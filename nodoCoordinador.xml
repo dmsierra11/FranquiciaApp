@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <nodo>
+    <ip>localhost</ip>
+    <puerto>10000</puerto>
+    <nombre>sucursal2</nombre>
+  </nodo>
+</root>
+

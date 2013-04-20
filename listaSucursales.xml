@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <sucursal>
+    <nombre>sucursal1</nombre>
+    <ubicacion>caracas</ubicacion>
+    <telefono>1234</telefono>
+  </sucursal>
+  <sucursal>
+    <nombre>sucursal2</nombre>
+    <ubicacion>caracas</ubicacion>
+    <telefono>1233</telefono>
+  </sucursal>
+</root>
+
