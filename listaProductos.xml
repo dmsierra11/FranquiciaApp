@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <root>
   <producto>
     <nombre>Harina</nombre>
@@ -9,12 +10,31 @@
     <nombre>Azucar</nombre>
     <descripcion>Azucar Morena</descripcion>
     <costo>25</costo>
+    <status>Activo</status>
+  </producto>
+  <producto>
+    <nombre>Cebolla</nombre>
+    <descripcion>Cebolla</descripcion>
+    <costo>100</costo>
     <status>Inactivo</status>
   </producto>
   <producto>
-    <nombre>Arroz</nombre>
-    <descripcion>Arroz Mary</descripcion>
-    <costo>17</costo>
+    <nombre>Pan</nombre>
+    <descripcion>Pan</descripcion>
+    <costo>100</costo>
     <status>Activo</status>
   </producto>
+  <producto>
+    <nombre>Caraotas</nombre>
+    <descripcion>Caraotas</descripcion>
+    <costo>100</costo>
+    <status>Activo</status>
+  </producto>
+  <producto>
+    <nombre>Naranja</nombre>
+    <descripcion>Naranja</descripcion>
+    <costo>20</costo>
+    <status>Inactivo</status>
+  </producto>
 </root>
+

@@ -6,6 +6,7 @@ package franquiciaapp;
 
 import java.io.File;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,9 +21,11 @@ public class GestionSucursal extends javax.swing.JFrame {
      * Creates new form GestionProducto
      */
     int selected = -1;
+    static String nombrearchivo;
     private String archivo = "listaProductos.xml";
     private String producto;
-
+    private JButton btn1;
+    
     public GestionSucursal() {
         initComponents();
         XMLSucursal xml = new XMLSucursal();
@@ -142,8 +145,27 @@ public class GestionSucursal extends javax.swing.JFrame {
     }//GEN-LAST:event_jBConfigActionPerformed
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
+        GestionInventario inventario2 = new GestionInventario();
+        Seleccionado();
+        System.out.println(getNombrearchivo());
+        inventario2.setVisible(true);
     }//GEN-LAST:event_jBModificarActionPerformed
 
+    public void Seleccionado()
+    {
+      selected = gestor.getSelectedRow();
+        if (selected >= 0) 
+        {
+            nombrearchivo = (String)gestor.getValueAt(selected, 0);
+        }  
+    }
+    
+    public static String getNombrearchivo()
+    {
+    return nombrearchivo;
+    }
+    
+    
     private void jBCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCrearActionPerformed
         RegistroSucursal Registro = new RegistroSucursal();
         Registro.setVisible(true);
