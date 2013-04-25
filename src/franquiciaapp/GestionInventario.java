@@ -1,9 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package franquiciaapp;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -12,20 +12,26 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Diego Alienware
  */
-
 public class GestionInventario extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form GestionProducto
      */
     int selected = -1;
     private String archivo = "inventarioProductos.xml";
     private String producto;
+    private Socket cliente;
 
     /**
      * Creates new form GestionInventario
      */
     public GestionInventario() {
+        initComponents();
+        XMLInventario xml = new XMLInventario();
+        xml.listarInventario(this, archivo);
+    }
+    
+    public GestionInventario(String sucursal) {
         initComponents();
         XMLInventario xml = new XMLInventario();
         xml.listarInventario(this, archivo);
@@ -43,8 +49,6 @@ public class GestionInventario extends javax.swing.JFrame {
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         gestor = new javax.swing.JTable();
-        jBConfig = new javax.swing.JButton();
-        jBModificar = new javax.swing.JButton();
         jBCrear = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -61,7 +65,7 @@ public class GestionInventario extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -73,40 +77,18 @@ public class GestionInventario extends javax.swing.JFrame {
         jScrollPane1.setBounds(50, 100, 490, 150);
         jLayeredPane1.add(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jBConfig.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
-        jBConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/network.png"))); // NOI18N
-        jBConfig.setText("IP/Puertos");
-        jBConfig.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBConfigActionPerformed(evt);
-            }
-        });
-        jBConfig.setBounds(410, 270, 125, 60);
-        jLayeredPane1.add(jBConfig, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jBModificar.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
-        jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/Inventory.png"))); // NOI18N
-        jBModificar.setText("Inventario");
-        jBModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBModificarActionPerformed(evt);
-            }
-        });
-        jBModificar.setBounds(250, 270, 130, 60);
-        jLayeredPane1.add(jBModificar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         jBCrear.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
-        jBCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/new.png"))); // NOI18N
-        jBCrear.setText("Nueva Sucursal");
+        jBCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/edit.png"))); // NOI18N
+        jBCrear.setText("Actualizar");
         jBCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBCrearActionPerformed(evt);
             }
         });
-        jBCrear.setBounds(50, 270, 170, 60);
+        jBCrear.setBounds(210, 270, 170, 60);
         jLayeredPane1.add(jBCrear, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/carrinho supermercado.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/carrinho supermercado.png"))); // NOI18N
         jLabel1.setBounds(330, 0, 90, 100);
         jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -115,7 +97,7 @@ public class GestionInventario extends javax.swing.JFrame {
         jLabel2.setBounds(50, 60, 270, 24);
         jLayeredPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/fondos-verdes.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondos-verdes.jpg"))); // NOI18N
         jLabel3.setBounds(-5, 0, 600, 370);
         jLayeredPane1.add(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -137,17 +119,29 @@ public class GestionInventario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfigActionPerformed
-        
-    }//GEN-LAST:event_jBConfigActionPerformed
-
-    private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
-
-    }//GEN-LAST:event_jBModificarActionPerformed
-
     private void jBCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCrearActionPerformed
-        RegistroSucursal Registro = new RegistroSucursal();
-        Registro.setVisible(true);
+        XMLNodoCoordinador nodoCoord = new XMLNodoCoordinador();
+        Nodo coordinador = nodoCoord.getCoordinador();
+
+        try {
+            System.out.println("Imprimiendo" + coordinador.getIp() + " " + coordinador.getPuerto());
+
+            this.cliente = new Socket(coordinador.getIp(), Integer.valueOf(coordinador.getPuerto()));
+            PrintWriter salida = new PrintWriter(this.cliente.getOutputStream(), true);
+            BufferedReader entrada = new BufferedReader(new InputStreamReader(this.cliente.getInputStream()));
+
+            //java.net.InetAddress i = java.net.InetAddress.getLocalHost();
+
+            salida.println(coordinador.getSucursal());
+
+            salida.close();
+            entrada.close();
+            this.cliente.close();
+
+        } catch (Exception e) {
+            System.out.println("Problemas al enviar el mensaje");
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jBCrearActionPerformed
 
     /**
@@ -184,7 +178,7 @@ public class GestionInventario extends javax.swing.JFrame {
             }
         });
     }
-    
+
     /**
      * Carga la tabla con los productos disponibles
      *
@@ -220,9 +214,7 @@ public class GestionInventario extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable gestor;
-    private javax.swing.JButton jBConfig;
     private javax.swing.JButton jBCrear;
-    private javax.swing.JButton jBModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

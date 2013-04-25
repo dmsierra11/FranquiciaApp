@@ -35,7 +35,7 @@ public class MenuFranquicia extends javax.swing.JFrame {
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
 
         jBProductos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jBProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/productos.png"))); // NOI18N
+        jBProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/productos.png"))); // NOI18N
         jBProductos.setText("Productos");
         jBProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -46,7 +46,7 @@ public class MenuFranquicia extends javax.swing.JFrame {
         jLayeredPane1.add(jBProductos, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jBSucursales.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jBSucursales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/sucursales.png"))); // NOI18N
+        jBSucursales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/sucursales.png"))); // NOI18N
         jBSucursales.setText("Sucursales");
         jBSucursales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,7 +56,7 @@ public class MenuFranquicia extends javax.swing.JFrame {
         jBSucursales.setBounds(180, 240, 180, 60);
         jLayeredPane1.add(jBSucursales, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/carrinho supermercado.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/carrinho supermercado.png"))); // NOI18N
         jLabel3.setText("Logo");
         jLabel3.setBounds(320, 20, 90, 100);
         jLayeredPane1.add(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -66,7 +66,7 @@ public class MenuFranquicia extends javax.swing.JFrame {
         jLabel1.setBounds(120, 50, 200, 30);
         jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/fondos-verdes.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondos-verdes.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
         jLabel2.setBounds(0, 0, 540, 350);
         jLayeredPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);

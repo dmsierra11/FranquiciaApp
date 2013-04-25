@@ -25,7 +25,7 @@ public class GestionSucursal extends javax.swing.JFrame {
     private String archivo = "listaProductos.xml";
     private String producto;
     private JButton btn1;
-    
+
     public GestionSucursal() {
         initComponents();
         XMLSucursal xml = new XMLSucursal();
@@ -75,7 +75,7 @@ public class GestionSucursal extends javax.swing.JFrame {
         jLayeredPane1.add(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jBConfig.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
-        jBConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/network.png"))); // NOI18N
+        jBConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/network.png"))); // NOI18N
         jBConfig.setText("IP/Puertos");
         jBConfig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,7 +86,7 @@ public class GestionSucursal extends javax.swing.JFrame {
         jLayeredPane1.add(jBConfig, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jBModificar.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
-        jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/Inventory.png"))); // NOI18N
+        jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Inventory.png"))); // NOI18N
         jBModificar.setText("Inventario");
         jBModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,7 +97,7 @@ public class GestionSucursal extends javax.swing.JFrame {
         jLayeredPane1.add(jBModificar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jBCrear.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
-        jBCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/new.png"))); // NOI18N
+        jBCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/new.png"))); // NOI18N
         jBCrear.setText("Nueva Sucursal");
         jBCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +107,7 @@ public class GestionSucursal extends javax.swing.JFrame {
         jBCrear.setBounds(50, 270, 170, 60);
         jLayeredPane1.add(jBCrear, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/carrinho supermercado.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/carrinho supermercado.png"))); // NOI18N
         jLabel1.setBounds(210, 0, 90, 100);
         jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -116,7 +116,7 @@ public class GestionSucursal extends javax.swing.JFrame {
         jLabel2.setBounds(50, 60, 177, 24);
         jLayeredPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/fondos-verdes.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondos-verdes.jpg"))); // NOI18N
         jLabel3.setBounds(-5, 0, 600, 370);
         jLayeredPane1.add(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -145,27 +145,28 @@ public class GestionSucursal extends javax.swing.JFrame {
     }//GEN-LAST:event_jBConfigActionPerformed
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
-        GestionInventario inventario2 = new GestionInventario();
-        Seleccionado();
-        System.out.println(getNombrearchivo());
-        inventario2.setVisible(true);
+        int selectedRow = this.gestor.getSelectedRow();
+        if (selectedRow != -1) {
+            String sucursal = (String) this.gestor.getModel().getValueAt(selectedRow, 0);
+            GestionInventario inventario2 = new GestionInventario(sucursal);
+            Seleccionado();
+            inventario2.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna sucursal", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jBModificarActionPerformed
 
-    public void Seleccionado()
-    {
-      selected = gestor.getSelectedRow();
-        if (selected >= 0) 
-        {
-            nombrearchivo = (String)gestor.getValueAt(selected, 0);
-        }  
+    public void Seleccionado() {
+        selected = gestor.getSelectedRow();
+        if (selected >= 0) {
+            nombrearchivo = (String) gestor.getValueAt(selected, 0);
+        }
     }
-    
-    public static String getNombrearchivo()
-    {
-    return nombrearchivo;
+
+    public static String getNombrearchivo() {
+        return nombrearchivo;
     }
-    
-    
+
     private void jBCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCrearActionPerformed
         RegistroSucursal Registro = new RegistroSucursal();
         Registro.setVisible(true);

@@ -3,12 +3,13 @@
  * and open the template in the editor.
  */
 package franquiciaapp;
+
 import java.io.File;
 import javax.swing.JOptionPane;
 
-
 /**
- *clase que permite el registro de los productos en la franquicia
+ * clase que permite el registro de los productos en la franquicia
+ *
  * @author gracielalucena
  */
 public class RegistroProducto extends javax.swing.JFrame {
@@ -16,9 +17,8 @@ public class RegistroProducto extends javax.swing.JFrame {
     /**
      * Creates new form RegistroProducto
      */
-            private String vacio = null;
+    private String vacio = null;
 
-    
     public RegistroProducto() {
         initComponents();
     }
@@ -51,7 +51,7 @@ public class RegistroProducto extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/carrinho supermercado.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/carrinho supermercado.png"))); // NOI18N
         jLabel3.setText("Logo");
         jLabel3.setBounds(320, 50, 90, 100);
         jLayeredPane1.add(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -130,9 +130,9 @@ public class RegistroProducto extends javax.swing.JFrame {
         examinar.setBounds(400, 230, 40, 30);
         jLayeredPane1.add(examinar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/fondos-verdes.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondos-verdes.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
-        jLabel2.setBounds(-5, 0, 600, 370);
+        jLabel2.setBounds(-5, 0, 600, 390);
         jLayeredPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -145,9 +145,7 @@ public class RegistroProducto extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .add(jLayeredPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 364, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 22, Short.MAX_VALUE))
+            .add(jLayeredPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
         );
 
         pack();
@@ -163,56 +161,40 @@ public class RegistroProducto extends javax.swing.JFrame {
 
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
         // TODO add your handling code here:
-        if ((this.nombre.getText().equals("")) || (this.descripcion.getText().equals("")) || (this.costo.getText().equals("")))
-                {
+        if ((this.nombre.getText().equals("")) || (this.descripcion.getText().equals("")) || (this.costo.getText().equals(""))) {
             JOptionPane.showMessageDialog(null, "Algun campo esta VACIO", "ERROR", JOptionPane.ERROR_MESSAGE);
             RegistroProducto Registro = new RegistroProducto();
             Registro.setVisible(true);
-            
-        }
-        
-        else{
-        
-        
-         XMLProducto productos = new XMLProducto();
-        boolean flag = productos.agregarProducto(this.nombre.getText(), this.descripcion.getText(), this.costo.getText());
-        if (flag= false){
-        //else    
-            
-            
-            JOptionPane.showMessageDialog(null, "No se pudo crear usuario", "ERROR", JOptionPane.ERROR_MESSAGE);
-            RegistroProducto Registro = new RegistroProducto();
-            Registro.setVisible(true);
-            this.dispose();
-        }else{
-                //File folder = new File("../FranquiciaApp/"+this.nombre.getText());
-                //folder.mkdir();
-                //String nombrearchivo ="listaProductos.xml";
-               // XMLCliente.archivoNuevo(nombrearchivo);
+
+        } else {
+
+
+            XMLProducto productos = new XMLProducto();
+            boolean flag = productos.agregarProducto(this.nombre.getText(), this.descripcion.getText(), this.costo.getText());
+            if (flag = false) {
+                //else    
+
+
+                JOptionPane.showMessageDialog(null, "No se pudo crear usuario", "ERROR", JOptionPane.ERROR_MESSAGE);
+                RegistroProducto Registro = new RegistroProducto();
+                Registro.setVisible(true);
+                this.dispose();
+            } else {
                 GestionProducto Gestion = new GestionProducto();
                 Gestion.setVisible(true);
                 this.dispose();
                 JOptionPane.showMessageDialog(null, "Producto creado correctamente", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
-             
-            //XMLnodos xmlnodo = new XMLnodos();
-            //int var=0;
-            //for (int i = 0; i < xmlnodo.cantNodos(); i++) {
-             
-              //  var=xmlnodo.cargaArchivos(i);
-               // HiloReplicador hiloReplicador;
-                // OJO EL 1200 ES EL PUERTO DE ENVIAR, EL DE ESCUCHA SE ESTA USANDO POR ARGUMENTO
-              //if(var==1){
-                //hiloReplicador = new HiloReplicador(Datos.getIp_vecino(), Datos.getPuerto_entrada(),Datos.getPuerto_salida(),this.campousuario.getText(),this.campoclave.getText(),"registrar");
-                  //hiloReplicador.start();
-              //}
 
-            //}
-        }
-  
-         
-                
-            
-        
+                //Replicar
+                Replicador replicador = new Replicador();
+                replicador.enviarXML("listaProductos.xml");
+
+            }
+
+
+
+
+
         }
     }//GEN-LAST:event_registrarActionPerformed
 
@@ -226,7 +208,6 @@ public class RegistroProducto extends javax.swing.JFrame {
 
     private void examinarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_examinarMouseClicked
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_examinarMouseClicked
 
     /**
@@ -263,7 +244,6 @@ public class RegistroProducto extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField costo;
     private javax.swing.JTextField descripcion;

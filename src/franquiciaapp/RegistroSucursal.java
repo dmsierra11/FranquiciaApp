@@ -40,7 +40,7 @@ public class RegistroSucursal extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/carrinho supermercado.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/carrinho supermercado.png"))); // NOI18N
         jLabel3.setText("Logo");
         jLabel3.setBounds(320, 50, 90, 100);
         jLayeredPane1.add(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -101,7 +101,7 @@ public class RegistroSucursal extends javax.swing.JFrame {
         jTTelefono.setBounds(240, 240, 200, 30);
         jLayeredPane1.add(jTTelefono, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/fondos-verdes.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondos-verdes.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
         jLabel2.setBounds(-5, 0, 600, 390);
         jLayeredPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -135,35 +135,23 @@ public class RegistroSucursal extends javax.swing.JFrame {
 
 
             XMLSucursal sucursales = new XMLSucursal();
+            sucursales.crearXMLInventario(this.jTNombre.getText());
             boolean flag = sucursales.agregarSucursal(this.jTNombre.getText(), this.jTDescripcion.getText(), this.jTTelefono.getText());
-            if (flag = false) {   
+            if (flag = false) {
                 JOptionPane.showMessageDialog(null, "No se pudo agregar sucursal", "ERROR", JOptionPane.ERROR_MESSAGE);
                 RegistroSucursal Registro = new RegistroSucursal();
                 Registro.setVisible(true);
                 this.dispose();
             } else {
-                //File folder = new File("../FranquiciaApp/"+this.nombre.getText());
-                //folder.mkdir();
-                //String nombrearchivo ="listaProductos.xml";
-                // XMLCliente.archivoNuevo(nombrearchivo);
                 GestionSucursal Gestion = new GestionSucursal();
                 Gestion.setVisible(true);
                 this.dispose();
                 JOptionPane.showMessageDialog(null, "Sucursal creada correctamente", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
 
-                //XMLnodos xmlnodo = new XMLnodos();
-                //int var=0;
-                //for (int i = 0; i < xmlnodo.cantNodos(); i++) {
-
-                //  var=xmlnodo.cargaArchivos(i);
-                // HiloReplicador hiloReplicador;
-                // OJO EL 1200 ES EL PUERTO DE ENVIAR, EL DE ESCUCHA SE ESTA USANDO POR ARGUMENTO
-                //if(var==1){
-                //hiloReplicador = new HiloReplicador(Datos.getIp_vecino(), Datos.getPuerto_entrada(),Datos.getPuerto_salida(),this.campousuario.getText(),this.campoclave.getText(),"registrar");
-                //hiloReplicador.start();
-                //}
-
-                //}
+               //Replicar
+                Replicador replicador = new Replicador();
+                replicador.enviarXML("listaSucursales.xml");
+                replicador.enviarXML(this.jTNombre.getText()+".xml");
             }
 
 

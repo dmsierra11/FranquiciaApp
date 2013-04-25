@@ -10,5 +10,15 @@
     <ubicacion>caracas</ubicacion>
     <telefono>1233</telefono>
   </sucursal>
+  <sucursal>
+    <nombre>sucursalCaracas</nombre>
+    <ubicacion>Caracas</ubicacion>
+    <telefono>02121234565</telefono>
+  </sucursal>
+  <sucursal>
+    <nombre>SucursalPLC</nombre>
+    <ubicacion>Puerto La Cruz</ubicacion>
+    <telefono>1234456</telefono>
+  </sucursal>
 </root>
 

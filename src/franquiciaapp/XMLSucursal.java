@@ -30,7 +30,7 @@ public class XMLSucursal {
             elNombre = new Element("nombre");
             laUbicacion = new Element("ubicacion");
             elTelefono = new Element("telefono");
-            
+
 
             root.addContent(laSucursal);
             laSucursal.addContent(elNombre);
@@ -94,53 +94,56 @@ public class XMLSucursal {
         }
     }
 
-    boolean registrarCoordinador(String ip, String puerto, String nombre) {
+    public boolean registrarCoordinador(String ip, String puerto, String nombre) {
         Document doc;
         Element root, elNodo, elNombre, laIP, elPuerto;
         SAXBuilder builder = new SAXBuilder();
         try {
-            doc = builder.build("nodoCoordinador.xml");
-            root = doc.getRootElement();
-            // Creamos una nueva etiqueta
-            elNodo = new Element("nodo");
-            elNombre = new Element("nombre");
-            laIP = new Element("ip");
-            elPuerto = new Element("puerto");
-            
 
-            root.addContent(elNodo);            
-            elNodo.addContent(laIP);
-            laIP.addContent(ip);
-            elNodo.addContent(elPuerto);
-            elPuerto.addContent(puerto);
-            elNodo.addContent(elNombre);
-            elNombre.addContent(nombre);
+            root = new Element("root");
+            doc = new Document(root);
+            doc.setRootElement(root);
 
-            try {
-                Format format = Format.getPrettyFormat();
-                /* Se genera un flujo de salida de datos XML */
-                XMLOutputter out = new XMLOutputter(format);
-                /* Se asocia el flujo de salida con el archivo donde se guardaran los datos */
-                FileOutputStream file = new FileOutputStream("nodoCoordinador.xml");
-                /* Se manda el documento generado hacia el archivo XML */
-                out.output(doc, file);
-                /* Se limpia el buffer ocupado por el objeto file y se manda a cerrar el archivo */
-                file.flush();
-                file.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } catch (JDOMParseException e) {
-            System.out.println("Error loading XML file - The file is empty1");
-            e.printStackTrace();
-        } catch (JDOMException e) {
-            System.out.println("Error loading XML file - The file is empty2");
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.out.println("Error loading XML file - The file is empty3");
-            e.printStackTrace();
+            Element nodo = new Element("nodo");
+            nodo.addContent(new Element("ip").setText(ip));
+            nodo.addContent(new Element("puerto").setText(puerto));
+            nodo.addContent(new Element("nombre").setText(nombre));
+
+            doc.getRootElement().addContent(nodo);
+
+            XMLOutputter xmlOutput = new XMLOutputter();
+
+            // display nice nice
+            xmlOutput.setFormat(Format.getPrettyFormat());
+            xmlOutput.output(doc, new FileWriter("nodoCoordinador.xml"));
+
+            System.out.println("File Saved!");
+        } catch (IOException io) {
+            System.out.println(io.getMessage());
         }
+        return true;
+    }
 
+    public boolean crearXMLInventario(String nombre) {
+        Document doc;
+        Element root;
+        SAXBuilder builder = new SAXBuilder();
+        try {
+
+            root = new Element("root");
+            doc = new Document(root);
+            doc.setRootElement(root);
+
+            XMLOutputter xmlOutput = new XMLOutputter();
+
+            // display nice nice
+            xmlOutput.setFormat(Format.getPrettyFormat());
+            xmlOutput.output(doc, new FileWriter(nombre + ".xml"));
+
+            System.out.println("File Saved!");
+        } catch (IOException io) {
+            System.out.println(io.getMessage());
+        }
         return true;
     }
 }

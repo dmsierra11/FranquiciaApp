@@ -90,7 +90,7 @@
               <Font name="Lucida Grande" size="11" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/franquiciaapp/network.png"/>
+              <Image iconType="3" name="/imagenes/network.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="IP/Puertos"/>
           </Properties>
@@ -109,7 +109,7 @@
               <Font name="Lucida Grande" size="11" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/franquiciaapp/Inventory.png"/>
+              <Image iconType="3" name="/imagenes/Inventory.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Inventario"/>
           </Properties>
@@ -128,7 +128,7 @@
               <Font name="Lucida Grande" size="11" style="1"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/franquiciaapp/new.png"/>
+              <Image iconType="3" name="/imagenes/new.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Nueva Sucursal"/>
           </Properties>
@@ -144,7 +144,7 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/franquiciaapp/carrinho supermercado.png"/>
+              <Image iconType="3" name="/imagenes/carrinho supermercado.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -169,7 +169,7 @@
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/franquiciaapp/fondos-verdes.jpg"/>
+              <Image iconType="3" name="/imagenes/fondos-verdes.jpg"/>
             </Property>
           </Properties>
           <Constraints>

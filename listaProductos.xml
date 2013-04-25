@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <root>
   <producto>
     <nombre>Harina</nombre>
@@ -36,5 +35,10 @@
     <costo>20</costo>
     <status>Inactivo</status>
   </producto>
+  <producto>
+    <nombre>Patillas</nombre>
+    <descripcion>Patillas</descripcion>
+    <costo>18</costo>
+    <status>Activo</status>
+  </producto>
 </root>
-

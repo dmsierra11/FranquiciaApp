@@ -24,5 +24,17 @@
     <costo>100</costo>
     <cantidad>20</cantidad>
   </producto>
+  <producto>
+    <nombre>Patillas</nombre>
+    <descripcion>Patillas</descripcion>
+    <costo>18</costo>
+    <cantidad>20</cantidad>
+  </producto>
+  <producto>
+    <nombre>Cubitos</nombre>
+    <descripcion>Cubitos Maggi</descripcion>
+    <costo>23</costo>
+    <cantidad>20</cantidad>
+  </producto>
 </root>
 

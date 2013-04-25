@@ -71,7 +71,7 @@ public class GestionProducto extends javax.swing.JFrame {
         jLayeredPane1.add(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         eliminar.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
-        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/delete.png"))); // NOI18N
+        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/delete.png"))); // NOI18N
         eliminar.setText("Eliminar");
         eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,7 +82,7 @@ public class GestionProducto extends javax.swing.JFrame {
         jLayeredPane1.add(eliminar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jBModificar.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
-        jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/edit.png"))); // NOI18N
+        jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/edit.png"))); // NOI18N
         jBModificar.setText("Modificar");
         jBModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,7 +93,7 @@ public class GestionProducto extends javax.swing.JFrame {
         jLayeredPane1.add(jBModificar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jBCrear.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
-        jBCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/new.png"))); // NOI18N
+        jBCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/new.png"))); // NOI18N
         jBCrear.setText("Nuevo Producto");
         jBCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,7 +103,7 @@ public class GestionProducto extends javax.swing.JFrame {
         jBCrear.setBounds(60, 270, 170, 60);
         jLayeredPane1.add(jBCrear, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/carrinho supermercado.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/carrinho supermercado.png"))); // NOI18N
         jLabel1.setBounds(210, 0, 90, 100);
         jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -112,7 +112,7 @@ public class GestionProducto extends javax.swing.JFrame {
         jLabel2.setBounds(50, 60, 177, 24);
         jLayeredPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/fondos-verdes.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondos-verdes.jpg"))); // NOI18N
         jLabel3.setBounds(-5, 0, 600, 370);
         jLayeredPane1.add(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -146,26 +146,14 @@ public class GestionProducto extends javax.swing.JFrame {
         if (selected >= 0) {
             String nombrearchivo = (String) gestor.getValueAt(selected, 0);
             System.out.print(nombrearchivo);
-            //File archivo = new File(this.carpetausuario + "/" + nombrearchivo);
-
-            // XMLnodos xmlnodo = new XMLnodos();
-            //int var=0;
-            //for (int i = 0; i < xmlnodo.cantNodos(); i++) {
-
-            //  var=xmlnodo.cargaArchivos(i);
-            // HiloReplicador hiloReplicador;
-            // OJO EL 1200 ES EL PUERTO DE ENVIAR, EL DE ESCUCHA SE ESTA USANDO POR ARGUMENTO
-            //if(var==1){
-            // hiloReplicador = new HiloReplicador(Datos.getIp_vecino(), Datos.getPuerto_entrada(),Datos.getPuerto_salida(),archivo, this.carpetausuario,"eliminar");
-            // hiloReplicador.start();
-            //}
             XMLProducto xml = new XMLProducto();
             xml.borrarProducto(archivo, nombrearchivo);
-            //archivo.delete();
 
-            // TODO add your handling code here:
-            // }
             ((DefaultTableModel) this.gestor.getModel()).removeRow(selected);
+
+            //replica el archivo de productos para actualizar
+            Replicador replicador = new Replicador();
+            replicador.enviarXML("listaProductos.xml");
 
         } else {
             System.out.print("AHORA ACA");

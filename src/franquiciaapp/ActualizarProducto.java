@@ -61,7 +61,7 @@ public class ActualizarProducto extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/carrinho supermercado.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/carrinho supermercado.png"))); // NOI18N
         jLabel3.setText("Logo");
         jLabel3.setBounds(320, 50, 90, 100);
         jLayeredPane1.add(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -158,7 +158,7 @@ public class ActualizarProducto extends javax.swing.JFrame {
         examinar.setBounds(450, 230, 40, 30);
         jLayeredPane1.add(examinar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/franquiciaapp/fondos-verdes.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondos-verdes.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
         jLabel2.setBounds(0, 0, 650, 420);
         jLayeredPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -203,29 +203,16 @@ public class ActualizarProducto extends javax.swing.JFrame {
                 Registro.setVisible(true);
                 this.dispose();
             } else {
-                //File folder = new File("../FranquiciaApp/"+this.nombre.getText());
-                //folder.mkdir();
-                //String nombrearchivo ="listaProductos.xml";
-                // XMLCliente.archivoNuevo(nombrearchivo);
                 this.padre.dispose();
                 GestionProducto Gestion = new GestionProducto();
                 Gestion.setVisible(true);
                 this.dispose();
                 JOptionPane.showMessageDialog(null, "Producto modificado correctamente", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
 
-                //XMLnodos xmlnodo = new XMLnodos();
-                //int var=0;
-                //for (int i = 0; i < xmlnodo.cantNodos(); i++) {
-
-                //  var=xmlnodo.cargaArchivos(i);
-                // HiloReplicador hiloReplicador;
-                // OJO EL 1200 ES EL PUERTO DE ENVIAR, EL DE ESCUCHA SE ESTA USANDO POR ARGUMENTO
-                //if(var==1){
-                //hiloReplicador = new HiloReplicador(Datos.getIp_vecino(), Datos.getPuerto_entrada(),Datos.getPuerto_salida(),this.campousuario.getText(),this.campoclave.getText(),"registrar");
-                //hiloReplicador.start();
-                //}
-
-                //}
+                
+                //replica el archivo de productos para actualizar
+                Replicador replicador = new Replicador();
+                replicador.enviarXML("listaProductos.xml");
             }
 
 
@@ -295,8 +282,7 @@ public class ActualizarProducto extends javax.swing.JFrame {
         jTNombre.setText(productoSelec.getNombre());
         jTDescripcion.setText(productoSelec.getDescripcion());
         jTCosto.setText(productoSelec.getCosto());
-        jTImagen.setText(productoSelec.getFoto());
-        System.out.println(productoSelec.getStatus());
+        jTImagen.setText(productoSelec.getFoto());        
         jCBStatus.setSelectedItem(productoSelec.getStatus());
 
     }
