@@ -63,15 +63,7 @@ public class GestionInventario extends javax.swing.JFrame {
             new String [] {
                 "Nombre", "Costo", "Cantidad"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(gestor);
 
         jScrollPane1.setBounds(50, 100, 490, 150);
@@ -186,6 +178,7 @@ public class GestionInventario extends javax.swing.JFrame {
      * @param descripcion
      * @param foto
      * @param cantidad
+     * @param status
      */
     public void agregarfila(String nombre, String ubicacion, String telefono) {
         ((DefaultTableModel) this.gestor.getModel()).addRow(new Object[]{nombre, ubicacion, telefono});

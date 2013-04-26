@@ -4,11 +4,14 @@
  */
 package franquiciaapp;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -23,8 +26,51 @@ import org.jdom.output.XMLOutputter;
  */
 public class XMLInventario {
     
+    private Element root, root2;
+    private String xmlInventario = "inventarioProductos.xml";
+    
+    public void CrearInventario() {
+        int cont = 0;
+        SAXBuilder builder = new SAXBuilder();
+        XMLInventario inventario = new XMLInventario();
+        File xmlFile = new File("listaProductos.xml");
+
+        try {
+
+            Document document = (Document) builder.build(xmlFile);
+            Element rootNode = document.getRootElement();
+            List list = rootNode.getChildren("producto");
+
+            for (int i = 0; i < list.size(); i++) 
+            {
+               Element node = (Element) list.get(i);
+                      if (cont == 0) 
+                    {
+                        inventario.crearProductoInventario(node.getChildText("nombre"), node.getChildText("descripcion"), node.getChildText("costo"));
+                        cont = 1;
+                    } 
+                      else  
+                          inventario.agregarProductoInventario(node.getChildText("nombre"), node.getChildText("descripcion"), node.getChildText("costo"));               
+            }
+
+        } catch (IOException io) {
+            System.out.println(io.getMessage());
+        } catch (JDOMException jdomex) {
+            System.out.println(jdomex.getMessage());
+        }
+    }
+    
+    
+    /**
+     * Crea el XML de inventario con el primer producto
+     *
+     * @param nombre
+     * @param descripcion
+     * @param costo
+     * @return
+     */
     public boolean crearProductoInventario(String nombre, String descripcion, String costo) {
-        Element elProducto, elNombre, laDescripcion, elPrecio, laCantidad;
+        Element elProducto, elNombre, laDescripcion, elPrecio, laCantidad, elStatus;
         SAXBuilder builder = new SAXBuilder();
         try{ 
             Element root = new Element("root");
@@ -47,8 +93,8 @@ public class XMLInventario {
             elProducto.addContent(elPrecio);
             elPrecio.addContent(costo);
             elProducto.addContent(laCantidad);
-            laCantidad.addContent("20");
-
+            laCantidad.addContent("0");
+           
                 Format format = Format.getPrettyFormat();
                 /* Se genera un flujo de salida de datos XML */
                 XMLOutputter out = new XMLOutputter(format);
@@ -67,6 +113,14 @@ public class XMLInventario {
         return true;
     }
     
+    
+    /**
+     * lista los productos del inventario en la lista
+     *
+     * @param archivo
+     * @param ventana 
+     * @return
+     */
     void listarInventario(GestionInventario ventana, String archivo) {
         try {
             SAXBuilder builder = new SAXBuilder(false);
@@ -93,9 +147,71 @@ public class XMLInventario {
         }
     }
     
+     /**
+     * Permite la busqueda en el XML de inventario
+     *
+     * @param producto
+     * @return
+     */
+    public boolean buscar(String producto) {
+        SAXBuilder builder = new SAXBuilder(false);
+        Document doc = null;
+       try {
+            doc = builder.build("inventarioProductos.xml");
+        } catch (JDOMException ex) {
+            Logger.getLogger(XMLProducto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(XMLProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        root = doc.getRootElement();
+        Element raiz = doc.getRootElement();
+        List listaInventario = raiz.getChildren("producto");
+        for (int i = 0; i < listaInventario.size(); i++) 
+        {
+            Element node = (Element) listaInventario.get(i);
+            //System.out.println("imprimo en buscar: " + producto + " es " + producto.equals(node.getChildText("nombre")));
+            if (producto.equals(node.getChildText("nombre")) == true)     
+            return true;
+        }   
+        return false;
+    }
+    
+    /**
+     * Lee el XML de inventario
+     *
+     * @return
+     */
+    public void LeerInventario() {
+        SAXBuilder builder = new SAXBuilder(false);
+        Document doc = null;
+        try {
+            doc = builder.build("listaProductos.xml");
+        } catch (JDOMException ex) {
+            Logger.getLogger(XMLProducto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(XMLProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        root = doc.getRootElement();
+        Element raiz = doc.getRootElement();
+        List listaInventario = raiz.getChildren("producto");
+        for (int i = 0; i < listaInventario.size(); i++) 
+        {
+                Element node = (Element) listaInventario.get(i);
+                //System.out.println("producto nuevo " + node.getChildText("nombre"));
+                boolean aux = this.buscar(node.getChildText("nombre"));
+                //System.out.println(aux);
+                if (aux == false)
+                {
+                    //System.out.println("dentro del if" + node.getChildText("nombre"));
+                    this.agregarProductoInventario(node.getChildText("nombre"), node.getChildText("descripcion"), node.getChildText("costo"));
+                }
+        }
+}
+ 
+    
     public boolean agregarProductoInventario(String nombre, String descripcion, String costo) {
         Document doc;
-        Element root, elProducto, elNombre, laDescripcion, elPrecio, laCantidad;
+        Element root, elProducto, elNombre, laDescripcion, elPrecio, laCantidad, elStatus;
         SAXBuilder builder = new SAXBuilder();
         try {
             doc = builder.build("inventarioProductos.xml");
@@ -106,6 +222,7 @@ public class XMLInventario {
             laDescripcion = new Element("descripcion");
             elPrecio = new Element("costo");
             laCantidad = new Element("cantidad");
+            elStatus = new Element("status");
 
             root.addContent(elProducto);
             elProducto.addContent(elNombre);
@@ -115,8 +232,9 @@ public class XMLInventario {
             elProducto.addContent(elPrecio);
             elPrecio.addContent(costo);
             elProducto.addContent(laCantidad);
-            laCantidad.addContent("20");
+            laCantidad.addContent("0");
 
+            
             try {
                 Format format = Format.getPrettyFormat();
                 /* Se genera un flujo de salida de datos XML */

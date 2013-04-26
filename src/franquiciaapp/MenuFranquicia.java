@@ -95,8 +95,13 @@ public class MenuFranquicia extends javax.swing.JFrame {
 
     private void jBSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSucursalesActionPerformed
         GestionSucursal sucursales = new GestionSucursal();
-        InventarioFranquicia inventario = new InventarioFranquicia();
-        inventario.CrearInventario();
+        XMLInventario inventario = new XMLInventario();
+        File f = new File("inventarioProductos.xml");
+        if (f.exists() == true) 
+              inventario.LeerInventario();
+        else
+              inventario.CrearInventario();   
+        
         //this.dispose();
         sucursales.setVisible(true);
     }//GEN-LAST:event_jBSucursalesActionPerformed
