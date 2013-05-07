@@ -1,5 +1,6 @@
 package franquiciaapp;
 
+import Sockets.Replicador;
 import java.io.File;
 import javax.swing.JOptionPane;
 import javax.swing.*;
@@ -211,8 +212,8 @@ public class ActualizarProducto extends javax.swing.JFrame {
 
                 
                 //replica el archivo de productos para actualizar
-                Replicador replicador = new Replicador();
-                replicador.enviarXML("listaProductos.xml");
+                Replicador replicador = new Replicador("listaProductos.xml");
+                replicador.run();
             }
 
 

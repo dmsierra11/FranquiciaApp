@@ -1,5 +1,7 @@
-package franquiciaapp;
+package Sockets;
 
+import franquiciaapp.Nodo;
+import franquiciaapp.XMLNodoCoordinador;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -13,20 +15,27 @@ import java.net.Socket;
  *
  * @author daniel
  */
-public class Replicador {
+public class Replicador implements Runnable{
     
     private Socket cliente;
     private int puerto;
     private String ip;
+    private String nombreArchivo;
     
-    public Replicador(){
+    public Replicador(String nombreArchivo){
         XMLNodoCoordinador nodoCoord = new XMLNodoCoordinador();
         Nodo coordinador = nodoCoord.getCoordinador();
         this.puerto = Integer.parseInt(coordinador.getPuerto());
         this.ip = coordinador.getIp();
+        this.nombreArchivo = nombreArchivo;
+    }
+    
+    @Override
+    public void run(){
+        this.enviarXML();
     }
 
-    public void enviarXML(String nombreArchivo) {
+    public void enviarXML() {
         try {
             this.cliente = new Socket(this.ip, this.puerto);
 

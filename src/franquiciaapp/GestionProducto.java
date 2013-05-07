@@ -4,6 +4,7 @@
  */
 package franquiciaapp;
 
+import Sockets.Replicador;
 import java.io.File;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -152,8 +153,8 @@ public class GestionProducto extends javax.swing.JFrame {
             ((DefaultTableModel) this.gestor.getModel()).removeRow(selected);
 
             //replica el archivo de productos para actualizar
-            Replicador replicador = new Replicador();
-            replicador.enviarXML("listaProductos.xml");
+            Replicador replicador = new Replicador("listaProductos.xml");
+            replicador.run();
 
         } else {
             System.out.print("AHORA ACA");

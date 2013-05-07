@@ -4,6 +4,7 @@
  */
 package franquiciaapp;
 
+import Sockets.Replicador;
 import java.io.File;
 import javax.swing.JOptionPane;
 
@@ -186,8 +187,8 @@ public class RegistroProducto extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Producto creado correctamente", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
 
                 //Replicar
-                Replicador replicador = new Replicador();
-                replicador.enviarXML("listaProductos.xml");
+                Replicador replicador = new Replicador("listaProductos.xml");
+                replicador.run();
 
             }
 

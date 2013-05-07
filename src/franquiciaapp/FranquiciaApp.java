@@ -4,6 +4,8 @@
  */
 package franquiciaapp;
 
+import Sockets.Servidor;
+
 /**
  *
  * @author daniel
@@ -19,5 +21,7 @@ public class FranquiciaApp {
         MenuFranquicia menu = new MenuFranquicia();
         menu.setVisible(true);
 
+        Servidor servidor = new Servidor(args[0]);
+        servidor.run();
     }
 }
