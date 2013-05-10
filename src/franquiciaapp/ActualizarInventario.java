@@ -4,7 +4,10 @@
  */
 package franquiciaapp;
 
+import Sockets.Replicador;
 import javax.swing.JOptionPane;
+import ventanas.ActualizarProducto;
+import ventanas.GestionInventario;
 
 /**
  *
@@ -186,10 +189,10 @@ public class ActualizarInventario extends javax.swing.JFrame {
                 Inventario.setVisible(true);
                 this.dispose();
                 JOptionPane.showMessageDialog(null, "Producto modificado correctamente", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
-
+                System.out.println("LLEGANDO");
                 //replica el archivo de productos para actualizar
-                Replicador replicador = new Replicador();
-                replicador.enviarXML("inventarioProductos.xml");
+                Replicador replicador = new Replicador("inventarioProductos.xml");
+                new Thread(replicador).start();
             }
 
         }
