@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package franquiciaapp;
+package ventanas;
 
 import Sockets.Replicador;
+import franquiciaapp.XMLProducto;
 import java.io.File;
 import javax.swing.JOptionPane;
 
@@ -188,7 +189,7 @@ public class RegistroProducto extends javax.swing.JFrame {
 
                 //Replicar
                 Replicador replicador = new Replicador("listaProductos.xml");
-                replicador.run();
+                new Thread(replicador).start();
 
             }
 

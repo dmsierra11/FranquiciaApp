@@ -1,6 +1,7 @@
-package franquiciaapp;
+package ventanas;
 
 import Sockets.Replicador;
+import franquiciaapp.XMLSucursal;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -167,7 +168,7 @@ public class InfoCoordinador extends javax.swing.JFrame {
 
                 //Replicar
                 Replicador replicador = new Replicador("nodoCoordinador.xml");
-                replicador.run();
+                new Thread(replicador).start();
             }
         }
     }//GEN-LAST:event_jBAceptarActionPerformed

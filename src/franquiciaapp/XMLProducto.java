@@ -4,6 +4,7 @@
  */
 package franquiciaapp;
 
+import ventanas.GestionProducto;
 import java.io.*;
 import java.util.*;
 import java.util.logging.Level;

@@ -1,5 +1,8 @@
-package franquiciaapp;
+package ventanas;
 
+import franquiciaapp.Nodo;
+import franquiciaapp.XMLInventario;
+import franquiciaapp.XMLNodoCoordinador;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;

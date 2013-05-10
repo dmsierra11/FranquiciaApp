@@ -2,34 +2,33 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package franquiciaapp;
+package ventanas;
 
+import Sockets.Replicador;
+import franquiciaapp.Producto;
+import franquiciaapp.XMLProducto;
 import java.io.File;
-import java.util.ArrayList;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * Clase que permite la visualizacion y eliminacion de las sucursales
+ * Clase que permite la visualizacion y eliminacion de los productos
  *
- * @author daniel
+ * @author gracielalucena
  */
-public class GestionSucursal extends javax.swing.JFrame {
+public class GestionProducto extends javax.swing.JFrame {
 
     /**
      * Creates new form GestionProducto
      */
     int selected = -1;
-    static String nombrearchivo;
     private String archivo = "listaProductos.xml";
     private String producto;
-    private JButton btn1;
 
-    public GestionSucursal() {
+    public GestionProducto() {
         initComponents();
-        XMLSucursal xml = new XMLSucursal();
-        xml.listarSucursales(this, archivo);
+        XMLProducto xml = new XMLProducto();
+        xml.listarProductos(this, archivo);
     }
 
     /**
@@ -44,7 +43,7 @@ public class GestionSucursal extends javax.swing.JFrame {
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         gestor = new javax.swing.JTable();
-        jBConfig = new javax.swing.JButton();
+        eliminar = new javax.swing.JButton();
         jBModificar = new javax.swing.JButton();
         jBCrear = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -58,11 +57,11 @@ public class GestionSucursal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Ubicacion", "Telefono"
+                "Nombre", "Descripcion", "Imagen", "Costo", "Estatus"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -74,37 +73,37 @@ public class GestionSucursal extends javax.swing.JFrame {
         jScrollPane1.setBounds(50, 100, 490, 150);
         jLayeredPane1.add(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jBConfig.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
-        jBConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/network.png"))); // NOI18N
-        jBConfig.setText("IP/Puertos");
-        jBConfig.addActionListener(new java.awt.event.ActionListener() {
+        eliminar.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
+        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/delete.png"))); // NOI18N
+        eliminar.setText("Eliminar");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBConfigActionPerformed(evt);
+                eliminarActionPerformed(evt);
             }
         });
-        jBConfig.setBounds(410, 270, 125, 60);
-        jLayeredPane1.add(jBConfig, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        eliminar.setBounds(420, 270, 120, 60);
+        jLayeredPane1.add(eliminar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jBModificar.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
-        jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Inventory.png"))); // NOI18N
-        jBModificar.setText("Inventario");
+        jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/edit.png"))); // NOI18N
+        jBModificar.setText("Modificar");
         jBModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBModificarActionPerformed(evt);
             }
         });
-        jBModificar.setBounds(250, 270, 130, 60);
+        jBModificar.setBounds(260, 270, 130, 60);
         jLayeredPane1.add(jBModificar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jBCrear.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
         jBCrear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/new.png"))); // NOI18N
-        jBCrear.setText("Nueva Sucursal");
+        jBCrear.setText("Nuevo Producto");
         jBCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBCrearActionPerformed(evt);
             }
         });
-        jBCrear.setBounds(50, 270, 170, 60);
+        jBCrear.setBounds(60, 270, 170, 60);
         jLayeredPane1.add(jBCrear, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/carrinho supermercado.png"))); // NOI18N
@@ -139,36 +138,46 @@ public class GestionSucursal extends javax.swing.JFrame {
      *
      * @param evt
      */
-    private void jBConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfigActionPerformed
-        InfoCoordinador config = new InfoCoordinador(this);
-        config.setVisible(true);
-    }//GEN-LAST:event_jBConfigActionPerformed
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        // TODO add your handling code here:
+        System.out.print("estoy aqui");
+        System.out.print(selected);
+
+        selected = gestor.getSelectedRow();
+
+        System.out.print(gestor.getSelectedRow());
+        if (selected >= 0) {
+            String nombrearchivo = (String) gestor.getValueAt(selected, 0);
+            System.out.print(nombrearchivo);
+            XMLProducto xml = new XMLProducto();
+            xml.borrarProducto(archivo, nombrearchivo);
+
+            ((DefaultTableModel) this.gestor.getModel()).removeRow(selected);
+
+            //replica el archivo de productos para actualizar
+            Replicador replicador = new Replicador("listaProductos.xml");
+            new Thread(replicador).start();
+
+        } else {
+            System.out.print("AHORA ACA");
+        }
+        System.out.print(selected);
+
+    }//GEN-LAST:event_eliminarActionPerformed
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
-        int selectedRow = this.gestor.getSelectedRow();
-        if (selectedRow != -1) {
-            String sucursal = (String) this.gestor.getModel().getValueAt(selectedRow, 0);
-            GestionInventario inventario2 = new GestionInventario(sucursal);
-            Seleccionado();
-            inventario2.setVisible(true);
+
+        if (this.gestor.getSelectedRow() != -1) {
+            ActualizarProducto ventanaActualizar = new ActualizarProducto(this);
+            ventanaActualizar.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna sucursal", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No ha seleccionado ningun producto", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_jBModificarActionPerformed
 
-    public void Seleccionado() {
-        selected = gestor.getSelectedRow();
-        if (selected >= 0) {
-            nombrearchivo = (String) gestor.getValueAt(selected, 0);
-        }
-    }
-
-    public static String getNombrearchivo() {
-        return nombrearchivo;
-    }
-
     private void jBCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCrearActionPerformed
-        RegistroSucursal Registro = new RegistroSucursal();
+        RegistroProducto Registro = new RegistroProducto();
         Registro.setVisible(true);
     }//GEN-LAST:event_jBCrearActionPerformed
 
@@ -189,20 +198,20 @@ public class GestionSucursal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GestionSucursal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GestionSucursal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GestionSucursal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GestionSucursal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GestionSucursal().setVisible(true);
+                new GestionProducto().setVisible(true);
             }
         });
     }
@@ -215,17 +224,23 @@ public class GestionSucursal extends javax.swing.JFrame {
      * @param foto
      * @param costo
      */
-    public void agregarfila(String nombre, String ubicacion, String telefono) {
-        ((DefaultTableModel) this.gestor.getModel()).addRow(new Object[]{nombre, ubicacion, telefono});
+    public void agregarfila(String nombre, String descripcion, String foto, String costo, String status) {
+        ((DefaultTableModel) this.gestor.getModel()).addRow(new Object[]{nombre, descripcion, foto, costo, status});
 
     }
 
-    public ArrayList<String> getSucursales() {
-        ArrayList<String> sucursales = new ArrayList<String>();
-        for (int i = 0; i < this.gestor.getRowCount(); i++) {
-            sucursales.add((String) this.gestor.getModel().getValueAt(i, 0));
-        }
-        return sucursales;
+    public Producto getProductoSeleccionado() {
+        int selectedRow = this.gestor.getSelectedRow();
+        String productoNombre = (String) this.gestor.getModel().getValueAt(selectedRow, 0);
+        String productoDesc = (String) this.gestor.getModel().getValueAt(selectedRow, 1);
+        String productoFoto = (String) this.gestor.getModel().getValueAt(selectedRow, 2);
+        String productoCosto = (String) this.gestor.getModel().getValueAt(selectedRow, 3);
+        String productoStatus = (String) this.gestor.getModel().getValueAt(selectedRow, 4);
+
+        Producto product = new Producto(productoNombre, productoDesc, productoFoto,
+                productoCosto, productoStatus);
+
+        return product;
     }
 
     public int getRowCount() {
@@ -241,8 +256,8 @@ public class GestionSucursal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton eliminar;
     private javax.swing.JTable gestor;
-    private javax.swing.JButton jBConfig;
     private javax.swing.JButton jBCrear;
     private javax.swing.JButton jBModificar;
     private javax.swing.JLabel jLabel1;

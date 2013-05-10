@@ -4,6 +4,7 @@
  */
 package franquiciaapp;
 
+import ventanas.GestionInventario;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -121,7 +122,7 @@ public class XMLInventario {
      * @param ventana 
      * @return
      */
-    void listarInventario(GestionInventario ventana, String archivo) {
+    public void listarInventario(GestionInventario ventana, String archivo) {
         try {
             SAXBuilder builder = new SAXBuilder(false);
             //System.out.println(usuario);
