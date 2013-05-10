@@ -4,6 +4,7 @@
  */
 package franquiciaapp;
 
+import ventanas.GestionSucursal;
 import java.io.*;
 import java.util.*;
 import java.util.logging.Level;
@@ -68,7 +69,7 @@ public class XMLSucursal {
         return true;
     }
 
-    void listarSucursales(GestionSucursal ventana, String archivo) {
+    public void listarSucursales(GestionSucursal ventana, String archivo) {
         try {
             SAXBuilder builder = new SAXBuilder(false);
             //System.out.println(usuario);
@@ -95,13 +96,10 @@ public class XMLSucursal {
     }
 
     public boolean registrarCoordinador(String ip, String puerto, String nombre) {
-        Document doc;
-        Element root, elNodo, elNombre, laIP, elPuerto;
-        SAXBuilder builder = new SAXBuilder();
         try {
 
-            root = new Element("root");
-            doc = new Document(root);
+            Element root = new Element("root");
+            Document doc = new Document(root);
             doc.setRootElement(root);
 
             Element nodo = new Element("nodo");

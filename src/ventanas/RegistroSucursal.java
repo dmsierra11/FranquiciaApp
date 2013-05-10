@@ -1,5 +1,7 @@
-package franquiciaapp;
+package ventanas;
 
+import Sockets.Replicador;
+import franquiciaapp.XMLSucursal;
 import java.io.File;
 import javax.swing.JOptionPane;
 
@@ -149,9 +151,10 @@ public class RegistroSucursal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Sucursal creada correctamente", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
 
                //Replicar
-                Replicador replicador = new Replicador();
-                replicador.enviarXML("listaSucursales.xml");
-                replicador.enviarXML(this.jTNombre.getText()+".xml");
+                Replicador replicador = new Replicador("listaSucursales.xml");
+                new Thread(replicador).start();
+                Replicador replicador2 = new Replicador(this.jTNombre.getText()+".xml");
+                new Thread(replicador2).start();
             }
 
 

@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package franquiciaapp;
+package ventanas;
 
+import franquiciaapp.XMLSucursal;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JButton;

@@ -2,8 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package franquiciaapp;
+package ventanas;
 
+import Sockets.Replicador;
+import franquiciaapp.Producto;
+import franquiciaapp.XMLProducto;
 import java.io.File;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -152,8 +155,8 @@ public class GestionProducto extends javax.swing.JFrame {
             ((DefaultTableModel) this.gestor.getModel()).removeRow(selected);
 
             //replica el archivo de productos para actualizar
-            Replicador replicador = new Replicador();
-            replicador.enviarXML("listaProductos.xml");
+            Replicador replicador = new Replicador("listaProductos.xml");
+            new Thread(replicador).start();
 
         } else {
             System.out.print("AHORA ACA");

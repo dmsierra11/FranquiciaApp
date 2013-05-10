@@ -1,5 +1,7 @@
-package franquiciaapp;
+package ventanas;
 
+import Sockets.Replicador;
+import franquiciaapp.XMLSucursal;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -165,8 +167,8 @@ public class InfoCoordinador extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Se ha registrado el nodo coordinador", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
 
                 //Replicar
-                Replicador replicador = new Replicador();
-                replicador.enviarXML("nodoCoordinador.xml");
+                Replicador replicador = new Replicador("nodoCoordinador.xml");
+                new Thread(replicador).start();
             }
         }
     }//GEN-LAST:event_jBAceptarActionPerformed

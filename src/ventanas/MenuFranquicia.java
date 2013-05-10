@@ -1,5 +1,6 @@
-package franquiciaapp;
+package ventanas;
 
+import franquiciaapp.XMLInventario;
 import java.io.File;
 import javax.swing.JOptionPane;
 import javax.swing.*;

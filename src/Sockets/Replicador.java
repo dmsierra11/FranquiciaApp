@@ -1,33 +1,48 @@
-package franquiciaapp;
+package Sockets;
 
+import franquiciaapp.FranquiciaApp;
+import franquiciaapp.Historial;
+import franquiciaapp.Nodo;
+import franquiciaapp.XMLNodoCoordinador;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.ConnectException;
 import java.net.Socket;
 
 /**
  *
  * @author daniel
  */
-public class Replicador {
-    
+public class Replicador implements Runnable {
+
     private Socket cliente;
     private int puerto;
     private String ip;
-    
-    public Replicador(){
+    private String nombreArchivo;
+
+    public Replicador(String nombreArchivo) {
         XMLNodoCoordinador nodoCoord = new XMLNodoCoordinador();
         Nodo coordinador = nodoCoord.getCoordinador();
         this.puerto = Integer.parseInt(coordinador.getPuerto());
         this.ip = coordinador.getIp();
+        this.nombreArchivo = nombreArchivo;
     }
 
-    public void enviarXML(String nombreArchivo) {
+    @Override
+    public void run() {
+        this.enviarXML();
+    }
+
+    public void enviarXML() {
         try {
+
             this.cliente = new Socket(this.ip, this.puerto);
 
             // enviar archivo  
@@ -47,12 +62,20 @@ public class Replicador {
             dos.writeLong(mybytearray.length);
             dos.write(mybytearray, 0, mybytearray.length);
             dos.flush();
-            
+
             this.cliente.close();
 
-        } catch (Exception e) {
-            System.out.println("Problemas al enviar el archivo");
-            e.printStackTrace();
+        } catch (ConnectException ce) {
+            System.out.println("No se encuentra el HOST");            
+            FranquiciaApp.sinConexion = true;
+            new Historial().escribirHistorial(nombreArchivo);
+            
+        } catch (FileNotFoundException nf){
+            System.out.println("No se ha encontrado el archivo");
+            nf.printStackTrace();
+            
+        } catch (IOException io){
+            io.printStackTrace();
         } 
-    }   
+    }
 }
