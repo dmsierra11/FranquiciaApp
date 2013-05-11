@@ -114,11 +114,11 @@ public class XMLInventario {
         return true;
     }
     
-    public boolean actualizarInventario(String nombreOrig, String nombreI, String cantidadI) {
+    public boolean actualizarInventario(String nombreOrig, String nombreI, String descripcionI, String costoI, String cantidadI) {
         try {
             SAXBuilder builder = new SAXBuilder(false);
             //System.out.println(usuario);
-            Document doc = builder.build(nombreOrig+".xml");
+            Document doc = builder.build("inventarioProductos.xml");
             Element raiz = doc.getRootElement();
             List listaProducto = raiz.getChildren("producto");
             Iterator k = listaProducto.iterator();
@@ -126,9 +126,18 @@ public class XMLInventario {
                 int i = 0, j = 0;
                 Element e = (Element) k.next();
                 Element nombre = e.getChild("nombre");
-                if (nombre.getText().equalsIgnoreCase(nombreI)) {
-                   
+                if (nombre.getText().equalsIgnoreCase(nombreOrig)) {
+                    Element descripcion = e.getChild("descripcion");
+                    Element costo = e.getChild("costo");
                     Element cantidad = e.getChild("cantidad");
+                    System.out.println("inicio");
+                    System.out.println(nombreI);
+                    System.out.println(descripcionI);
+                    System.out.println(costoI);
+                    System.out.println("fin");
+                    nombre.setText(nombreI);
+                    descripcion.setText(descripcionI);
+                    costo.setText(costoI);
                     cantidad.setText(cantidadI);
 
                     //if (e.getChild("status") != null) {
@@ -144,7 +153,7 @@ public class XMLInventario {
                 }
 
                 XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
-                xmlOutputter.output(doc, new FileOutputStream(nombreOrig+".xml"));
+                xmlOutputter.output(doc, new FileOutputStream("inventarioProductos.xml"));
 
             }
         } catch (FileNotFoundException F) {
@@ -215,11 +224,8 @@ public class XMLInventario {
             Element node = (Element) listaInventario.get(i);
             //System.out.println("imprimo en buscar: " + producto + " es " + producto.equals(node.getChildText("nombre")));
             if (producto.equals(node.getChildText("nombre")) == true)     
-              
-           // actualizarInventario(sucursal, sucursal, producto, producto, sucursal);
             return true;
         }   
-        System.out.println("NO LO ENCONTRE");
         return false;
     }
     
