@@ -107,7 +107,7 @@ public class XMLInventario {
             elPrecio.addContent(costo);
             elProducto.addContent(laCantidad);
             laCantidad.addContent("0");
-             elStatus.addContent(elStatus);
+             elProducto.addContent(elStatus);
             elStatus.addContent("Activo");
            
                 Format format = Format.getPrettyFormat();
@@ -128,6 +128,56 @@ public class XMLInventario {
             }
         return true;
     }
+    
+    public boolean borrarProducto(String archivo, String producto) {
+        SAXBuilder builder = new SAXBuilder(false);
+        Document doc = null;
+        try {
+            doc = builder.build(archivo+".xml");
+        } catch (JDOMException ex) {
+            Logger.getLogger(XMLProducto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(XMLProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        root = doc.getRootElement();
+        boolean resultado = false;
+        Element aux = new Element("producto");
+        List Productos = this.root.getChildren("producto");
+        while (aux != null) {
+            aux = this.buscarEliminar(Productos, archivo, producto);
+            if (aux != null) {
+                Productos.remove(aux);
+                resultado = updateDocument(archivo);
+            }
+        }
+        return resultado;
+    }
+    
+      private boolean updateDocument(String archivo) {
+        try {
+            XMLOutputter out = new XMLOutputter(org.jdom.output.Format.getPrettyFormat());
+            FileOutputStream file = new FileOutputStream(archivo+".xml");
+            out.output(root, file);
+            file.flush();
+            file.close();
+            return true;
+        } catch (Exception e) {
+            System.out.println("error: " + e.getMessage());
+            return false;
+        }
+    }
+    
+     public static Element buscarEliminar(List raiz, String archivo, String producto) {
+        Iterator i = raiz.iterator();
+        while (i.hasNext()) {
+            Element elemento = (Element) i.next();
+            if (producto.equals(elemento.getChild("nombre").getText())) {
+                return elemento;
+            }
+        }
+        return null;
+    }
+
     
     public boolean actualizarInventario(String nombreOrig, String nombreI, String cantidadI) {
         try {
@@ -326,12 +376,24 @@ public class XMLInventario {
                 Element node2 = (Element) listaInventario2.get(i);
                 //System.out.println("producto nuevo " + node.getChildText("nombre"));
                 boolean aux2 = this.buscar(node2.getChildText("nombre"), "listaProductos");
+                String aux3 = node2.getChildText("cantidad");
                 //System.out.println(aux);
                 if (aux2 == false)
                 {
                     //System.out.println("dentro del if" + node.getChildText("nombre"));
                     System.out.println("NO ENCONTRE EN LISTA PRODUCTO"+ node2.getChildText("nombre"));
+                    System.out.println(aux3+ " esto es la cantidad");
+                        if (!aux3.equalsIgnoreCase("0")){
+                            
+                            System.out.println("cantidad no cero");
                     this.actualizarStatus(sucursal, node2.getChildText("nombre"));
+                        } 
+                       else
+                        {
+                                                        System.out.println("cantidad 0");
+
+                        this.borrarProducto(sucursal, node2.getChildText("nombre"));
+                        }
                     //this.agregarProductoInventario(node.getChildText("nombre"), node.getChildText("descripcion"), node.getChildText("costo"), sucursal);
                 }
 }

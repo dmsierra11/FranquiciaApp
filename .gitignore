@@ -43,3 +43,7 @@ nb-configuration.xml
 build/built-jar.properties
 
 build/built-jar.properties
+
+*.xml
+
+*.xml

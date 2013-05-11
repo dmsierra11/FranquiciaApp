@@ -32,8 +32,8 @@
     <nombre>Caraotas</nombre>
     <descripcion>Caraotas</descripcion>
     <costo>100</costo>
-    <cantidad>0</cantidad>
-    <status>Activo</status>
+    <cantidad>100</cantidad>
+    <status>Inactivo</status>
   </producto>
   <producto>
     <nombre>Naranja</nombre>
@@ -41,13 +41,6 @@
     <costo>20</costo>
     <cantidad>0</cantidad>
     <status>Activo</status>
-  </producto>
-  <producto>
-    <nombre>Patillas</nombre>
-    <descripcion>Patillas</descripcion>
-    <costo>18</costo>
-    <cantidad>0</cantidad>
-    <status>Inactivo</status>
   </producto>
   <producto>
     <nombre>Lechuga</nombre>
@@ -62,13 +55,6 @@
     <costo>123</costo>
     <cantidad>0</cantidad>
     <status>Activo</status>
-  </producto>
-  <producto>
-    <nombre>repollo2</nombre>
-    <descripcion>rchicken2</descripcion>
-    <costo>1232</costo>
-    <cantidad>0</cantidad>
-    <status>Inactivo</status>
   </producto>
 </root>
 

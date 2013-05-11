@@ -25,12 +25,6 @@
     <status>Activo</status>
   </producto>
   <producto>
-    <nombre>Caraotas</nombre>
-    <descripcion>Caraotas</descripcion>
-    <costo>100</costo>
-    <status>Activo</status>
-  </producto>
-  <producto>
     <nombre>Naranja</nombre>
     <descripcion>Naranja</descripcion>
     <costo>20</costo>
