@@ -151,7 +151,6 @@ public class GestionSucursal extends javax.swing.JFrame {
             String sucursal = (String) this.gestor.getModel().getValueAt(selectedRow, 0);
             GestionInventario inventario2 = new GestionInventario(sucursal);
             Seleccionado(); 
-            System.out.println(sucursal); 
             
             
             

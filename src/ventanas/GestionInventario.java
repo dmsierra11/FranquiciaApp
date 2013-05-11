@@ -27,6 +27,7 @@ public class GestionInventario extends javax.swing.JFrame {
     private String archivo = "inventarioProductos.xml";
     private String producto;
     private Socket cliente;
+    private String sucursal;
 
     /**
      * Creates new form GestionInventario
@@ -41,6 +42,7 @@ public class GestionInventario extends javax.swing.JFrame {
     public GestionInventario(String sucursal) {
         initComponents();
         XMLInventario xml = new XMLInventario(sucursal);
+        this.sucursal = sucursal;
         
         File f = new File(sucursal+".xml");
         if (f.exists() == true) 
@@ -138,27 +140,15 @@ public class GestionInventario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCrearActionPerformed
-        XMLNodoCoordinador nodoCoord = new XMLNodoCoordinador();
-        Nodo coordinador = nodoCoord.getCoordinador();
-
-        try {
-            System.out.println("Imprimiendo" + coordinador.getIp() + " " + coordinador.getPuerto());
-
-            this.cliente = new Socket(coordinador.getIp(), Integer.valueOf(coordinador.getPuerto()));
-            PrintWriter salida = new PrintWriter(this.cliente.getOutputStream(), true);
-            BufferedReader entrada = new BufferedReader(new InputStreamReader(this.cliente.getInputStream()));
-
-            //java.net.InetAddress i = java.net.InetAddress.getLocalHost();
-
-            salida.println(coordinador.getSucursal());
-
-            salida.close();
-            entrada.close();
-            this.cliente.close();
-
-        } catch (Exception e) {
-            System.out.println("Problemas al enviar el mensaje");
-            e.printStackTrace();
+         int selectedRow = this.gestor.getSelectedRow();
+        if (selectedRow != -1) {
+            String producto = (String) this.gestor.getModel().getValueAt(selectedRow, 0);
+             String cantidad = (String) this.gestor.getModel().getValueAt(selectedRow, 3);
+             XMLInventario xml = new XMLInventario(sucursal);
+             xml.actualizarInventario(sucursal, producto,cantidad);
+             
+        } else {
+            JOptionPane.showMessageDialog(null, "No ha seleccionado ningun producto", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBCrearActionPerformed
 
