@@ -35,10 +35,5 @@
     <costo>20</costo>
     <status>Inactivo</status>
   </producto>
-  <producto>
-    <nombre>Patillas</nombre>
-    <descripcion>Patillas</descripcion>
-    <costo>18</costo>
-    <status>Activo</status>
-  </producto>
+ 
 </root>
