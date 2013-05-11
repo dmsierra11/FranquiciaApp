@@ -11,6 +11,7 @@ nbbuild/
 dist/
 nbdist/
 nbactions.xml
+<<<<<<< HEAD
 nb-configuration.xml
 .DS_Store
 
@@ -35,3 +36,6 @@ nbproject/private/private.properties
 nbproject/project.properties
 
 nbproject/project.properties
+=======
+nb-configuration.xml
+>>>>>>> ladilla
