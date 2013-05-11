@@ -4,43 +4,43 @@
     <nombre>Harina</nombre>
     <descripcion>Harina Juana</descripcion>
     <costo>20</costo>
-    <status>Activo</status>
+    <cantidad>134</cantidad>
   </producto>
   <producto>
     <nombre>Azucar</nombre>
     <descripcion>Azucar Morena</descripcion>
     <costo>25</costo>
-    <status>Activo</status>
+    <cantidad>13</cantidad>
   </producto>
   <producto>
     <nombre>Cebolla</nombre>
     <descripcion>Cebolla</descripcion>
     <costo>100</costo>
-    <status>Inactivo</status>
+    <cantidad>100</cantidad>
   </producto>
   <producto>
     <nombre>Pan</nombre>
     <descripcion>Pan</descripcion>
     <costo>100</costo>
-    <status>Activo</status>
+    <cantidad>100</cantidad>
   </producto>
   <producto>
     <nombre>Caraotas</nombre>
     <descripcion>Caraotas</descripcion>
     <costo>100</costo>
-    <status>Activo</status>
+    <cantidad>100</cantidad>
   </producto>
   <producto>
     <nombre>Naranja</nombre>
     <descripcion>Naranja</descripcion>
     <costo>20</costo>
-    <status>Inactivo</status>
+    <cantidad>100</cantidad>
   </producto>
   <producto>
     <nombre>Patillas</nombre>
     <descripcion>Patillas</descripcion>
     <costo>18</costo>
-    <status>Activo</status>
+    <cantidad>100</cantidad>
   </producto>
 </root>
 

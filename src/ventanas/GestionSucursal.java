@@ -150,7 +150,10 @@ public class GestionSucursal extends javax.swing.JFrame {
         if (selectedRow != -1) {
             String sucursal = (String) this.gestor.getModel().getValueAt(selectedRow, 0);
             GestionInventario inventario2 = new GestionInventario(sucursal);
-            Seleccionado();
+            Seleccionado(); 
+            
+            
+            
             inventario2.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ninguna sucursal", "ERROR", JOptionPane.ERROR_MESSAGE);

@@ -29,11 +29,22 @@ public class XMLInventario {
     
     private Element root, root2;
     private String xmlInventario = "inventarioProductos.xml";
+    private String nombreSucrusal;
     
-    public void CrearInventario() {
+    public XMLInventario (String sucursal){
+        this.nombreSucrusal = sucursal;  
+        
+  
+    }
+    
+  
+    
+    
+    
+    public void CrearInventario(String sucursal) {
         int cont = 0;
         SAXBuilder builder = new SAXBuilder();
-        XMLInventario inventario = new XMLInventario();
+        //XMLInventario inventario = new XMLInventario();
         File xmlFile = new File("listaProductos.xml");
 
         try {
@@ -47,11 +58,11 @@ public class XMLInventario {
                Element node = (Element) list.get(i);
                       if (cont == 0) 
                     {
-                        inventario.crearProductoInventario(node.getChildText("nombre"), node.getChildText("descripcion"), node.getChildText("costo"));
+                        crearProductoInventario(node.getChildText("nombre"), node.getChildText("descripcion"), node.getChildText("costo"), sucursal);
                         cont = 1;
                     } 
                       else  
-                          inventario.agregarProductoInventario(node.getChildText("nombre"), node.getChildText("descripcion"), node.getChildText("costo"));               
+                          agregarProductoInventario(node.getChildText("nombre"), node.getChildText("descripcion"), node.getChildText("costo"), sucursal);               
             }
 
         } catch (IOException io) {
@@ -70,7 +81,7 @@ public class XMLInventario {
      * @param costo
      * @return
      */
-    public boolean crearProductoInventario(String nombre, String descripcion, String costo) {
+    public boolean crearProductoInventario(String nombre, String descripcion, String costo, String sucursal) {
         Element elProducto, elNombre, laDescripcion, elPrecio, laCantidad, elStatus;
         SAXBuilder builder = new SAXBuilder();
         try{ 
@@ -100,10 +111,11 @@ public class XMLInventario {
                 /* Se genera un flujo de salida de datos XML */
                 XMLOutputter out = new XMLOutputter(format);
                 /* Se asocia el flujo de salida con el archivo donde se guardaran los datos */
-                FileOutputStream file = new FileOutputStream("inventarioProductos.xml");
+                FileOutputStream file = new FileOutputStream(sucursal+".xml");
                 /* Se manda el documento generado hacia el archivo XML */
                 out.output(doc, file);
                 System.out.println("Guardado crear");
+                System.out.println(sucursal);
                 /* Se limpia el buffer ocupado por el objeto file y se manda a cerrar el archivo */
                 file.flush();
                 file.close();
@@ -114,11 +126,11 @@ public class XMLInventario {
         return true;
     }
     
-    public boolean actualizarInventario(String nombreOrig, String nombreI, String descripcionI, String costoI, String cantidadI) {
+    public boolean actualizarInventario(String nombreOrig, String nombreI, String cantidadI) {
         try {
             SAXBuilder builder = new SAXBuilder(false);
             //System.out.println(usuario);
-            Document doc = builder.build("inventarioProductos.xml");
+            Document doc = builder.build(nombreOrig+".xml");
             Element raiz = doc.getRootElement();
             List listaProducto = raiz.getChildren("producto");
             Iterator k = listaProducto.iterator();
@@ -126,18 +138,9 @@ public class XMLInventario {
                 int i = 0, j = 0;
                 Element e = (Element) k.next();
                 Element nombre = e.getChild("nombre");
-                if (nombre.getText().equalsIgnoreCase(nombreOrig)) {
-                    Element descripcion = e.getChild("descripcion");
-                    Element costo = e.getChild("costo");
+                if (nombre.getText().equalsIgnoreCase(nombreI)) {
+                   
                     Element cantidad = e.getChild("cantidad");
-                    System.out.println("inicio");
-                    System.out.println(nombreI);
-                    System.out.println(descripcionI);
-                    System.out.println(costoI);
-                    System.out.println("fin");
-                    nombre.setText(nombreI);
-                    descripcion.setText(descripcionI);
-                    costo.setText(costoI);
                     cantidad.setText(cantidadI);
 
                     //if (e.getChild("status") != null) {
@@ -153,7 +156,7 @@ public class XMLInventario {
                 }
 
                 XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
-                xmlOutputter.output(doc, new FileOutputStream("inventarioProductos.xml"));
+                xmlOutputter.output(doc, new FileOutputStream(nombreOrig+".xml"));
 
             }
         } catch (FileNotFoundException F) {
@@ -173,11 +176,11 @@ public class XMLInventario {
      * @param ventana 
      * @return
      */
-    public void listarInventario(GestionInventario ventana, String archivo) {
+    public void listarInventario(GestionInventario ventana, String sucursal) {
         try {
             SAXBuilder builder = new SAXBuilder(false);
             //System.out.println(usuario);
-            Document doc = builder.build("inventarioProductos.xml");
+            Document doc = builder.build(sucursal+".xml");
             Element raiz = doc.getRootElement();
             List listaSucursal = raiz.getChildren("producto");
             Iterator k = listaSucursal.iterator();
@@ -206,11 +209,11 @@ public class XMLInventario {
      * @param producto
      * @return
      */
-    public boolean buscar(String producto) {
+    public boolean buscar(String producto, String sucursal) {
         SAXBuilder builder = new SAXBuilder(false);
         Document doc = null;
        try {
-            doc = builder.build("inventarioProductos.xml");
+            doc = builder.build(sucursal+".xml");
         } catch (JDOMException ex) {
             Logger.getLogger(XMLProducto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -224,8 +227,11 @@ public class XMLInventario {
             Element node = (Element) listaInventario.get(i);
             //System.out.println("imprimo en buscar: " + producto + " es " + producto.equals(node.getChildText("nombre")));
             if (producto.equals(node.getChildText("nombre")) == true)     
+              
+           // actualizarInventario(sucursal, sucursal, producto, producto, sucursal);
             return true;
         }   
+        System.out.println("NO LO ENCONTRE");
         return false;
     }
     
@@ -234,7 +240,7 @@ public class XMLInventario {
      *
      * @return
      */
-    public void LeerInventario() {
+    public void LeerInventario(String sucursal) {
         SAXBuilder builder = new SAXBuilder(false);
         Document doc = null;
         try {
@@ -251,23 +257,23 @@ public class XMLInventario {
         {
                 Element node = (Element) listaInventario.get(i);
                 //System.out.println("producto nuevo " + node.getChildText("nombre"));
-                boolean aux = this.buscar(node.getChildText("nombre"));
+                boolean aux = this.buscar(node.getChildText("nombre"), sucursal);
                 //System.out.println(aux);
                 if (aux == false)
                 {
                     //System.out.println("dentro del if" + node.getChildText("nombre"));
-                    this.agregarProductoInventario(node.getChildText("nombre"), node.getChildText("descripcion"), node.getChildText("costo"));
+                    this.agregarProductoInventario(node.getChildText("nombre"), node.getChildText("descripcion"), node.getChildText("costo"), sucursal);
                 }
         }
 }
  
     
-    public boolean agregarProductoInventario(String nombre, String descripcion, String costo) {
+    public boolean agregarProductoInventario(String nombre, String descripcion, String costo, String sucursal) {
         Document doc;
         Element root, elProducto, elNombre, laDescripcion, elPrecio, laCantidad, elStatus;
         SAXBuilder builder = new SAXBuilder();
         try {
-            doc = builder.build("inventarioProductos.xml");
+            doc = builder.build(sucursal+".xml");
             root = doc.getRootElement();
             // Creamos una nueva etiqueta
             elProducto = new Element("producto");
@@ -293,7 +299,7 @@ public class XMLInventario {
                 /* Se genera un flujo de salida de datos XML */
                 XMLOutputter out = new XMLOutputter(format);
                 /* Se asocia el flujo de salida con el archivo donde se guardaran los datos */
-                FileOutputStream file = new FileOutputStream("inventarioProductos.xml");
+                FileOutputStream file = new FileOutputStream(sucursal+".xml");
                 /* Se manda el documento generado hacia el archivo XML */
                 out.output(doc, file);
                 /* Se limpia el buffer ocupado por el objeto file y se manda a cerrar el archivo */
