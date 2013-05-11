@@ -1,11 +1,11 @@
 package ventanas;
 
+import franquiciaapp.ActualizarInventario;
 import franquiciaapp.Inventario;
 import franquiciaapp.Nodo;
 import franquiciaapp.XMLInventario;
 import franquiciaapp.XMLNodoCoordinador;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -34,13 +34,13 @@ public class GestionInventario extends javax.swing.JFrame {
      */
     public GestionInventario() {
         initComponents();
-//        XMLInventario xml = new XMLInventario();
-//        xml.listarInventario(this, archivo);
-//        
+        XMLInventario xml = new XMLInventario();
+        xml.listarInventario(this, archivo);
     }
     
     public GestionInventario(String sucursal) {
         initComponents();
+<<<<<<< HEAD
         XMLInventario xml = new XMLInventario(sucursal);
         this.sucursal = sucursal;
         
@@ -51,6 +51,10 @@ public class GestionInventario extends javax.swing.JFrame {
               xml.CrearInventario(sucursal);   
         
         xml.listarInventario(this, sucursal);
+=======
+        XMLInventario xml = new XMLInventario();
+        xml.listarInventario(this, archivo);
+>>>>>>> parent of 9ff0213... xml inventario
     }
 
     /**
@@ -155,6 +159,8 @@ public class GestionInventario extends javax.swing.JFrame {
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
 
         if (this.gestor.getSelectedRow() != -1) {
+            ActualizarInventario ventanaActualizarInventario = new ActualizarInventario(this);
+            ventanaActualizarInventario.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningun producto", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
