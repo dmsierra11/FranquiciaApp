@@ -67,7 +67,8 @@ public class Replicador implements Runnable {
             this.cliente.close();
 
         } catch (ConnectException ce) {
-            System.out.println("No se encuentra el HOST");            
+            System.out.println("No se encuentra el HOST"); 
+            System.out.println(this.ip);
             FranquiciaApp.sinConexion = true;
             new Historial().escribirHistorial(nombreArchivo);
             

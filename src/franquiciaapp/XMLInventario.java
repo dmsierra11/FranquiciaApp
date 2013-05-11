@@ -96,6 +96,7 @@ public class XMLInventario {
             laDescripcion = new Element("descripcion");
             elPrecio = new Element("costo");
             laCantidad = new Element("cantidad");
+            elStatus = new Element("status");
 
             root.addContent(elProducto);
             elProducto.addContent(elNombre);
@@ -106,6 +107,8 @@ public class XMLInventario {
             elPrecio.addContent(costo);
             elProducto.addContent(laCantidad);
             laCantidad.addContent("0");
+             elStatus.addContent(elStatus);
+            elStatus.addContent("Activo");
            
                 Format format = Format.getPrettyFormat();
                 /* Se genera un flujo de salida de datos XML */
@@ -168,6 +171,47 @@ public class XMLInventario {
         return true;
     }
     
+    public boolean actualizarStatus(String nombreOrig, String nombreI) {
+        try {
+            SAXBuilder builder = new SAXBuilder(false);
+            //System.out.println(usuario);
+            Document doc = builder.build(nombreOrig+".xml");
+            Element raiz = doc.getRootElement();
+            List listaProducto = raiz.getChildren("producto");
+            Iterator k = listaProducto.iterator();
+            while (k.hasNext()) {
+                int i = 0, j = 0;
+                Element e = (Element) k.next();
+                Element nombre = e.getChild("nombre");
+                if (nombre.getText().equalsIgnoreCase(nombreI)) {
+                   
+                    Element cantidad = e.getChild("status");
+                    cantidad.setText("Inactivo");
+
+                    //if (e.getChild("status") != null) {
+                    //    e.getChild("status").setText(status);
+                    //} else {
+                      //  Element estatus = new Element("status");
+                        //estatus.addContent(status);
+                        //e.addContent(estatus);
+                    //}
+
+                    //System.out.println(descripcion.getText());
+
+                }
+
+                XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
+                xmlOutputter.output(doc, new FileOutputStream(nombreOrig+".xml"));
+
+            }
+        } catch (FileNotFoundException F) {
+            System.out.println("Archivo XML no encontrado");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
     
     /**
      * lista los productos del inventario en la lista
@@ -191,8 +235,9 @@ public class XMLInventario {
                 Element costo = e.getChild("costo");
                 Element cantidad = e.getChild("cantidad");
                 Element descripcion = e.getChild("descripcion");
+                Element status = e.getChild("status");
                 // if (archivo.equals(user.getText())) {
-                ventana.agregarfila(nombre.getText(), descripcion.getText(), costo.getText(), cantidad.getText());
+                ventana.agregarfila(nombre.getText(), descripcion.getText(), costo.getText(), cantidad.getText(), status.getText());
                 //}
 
             }
@@ -264,8 +309,33 @@ public class XMLInventario {
                     //System.out.println("dentro del if" + node.getChildText("nombre"));
                     this.agregarProductoInventario(node.getChildText("nombre"), node.getChildText("descripcion"), node.getChildText("costo"), sucursal);
                 }
+         }
+        Document doc2 = null;
+        try {
+            doc2 = builder.build(sucursal+".xml");
+        } catch (JDOMException ex) {
+            Logger.getLogger(XMLProducto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(XMLProducto.class.getName()).log(Level.SEVERE, null, ex);
         }
+        root2 = doc2.getRootElement();
+        Element raiz2 = doc2.getRootElement();
+        List listaInventario2 = raiz2.getChildren("producto");
+        for (int i = 0; i < listaInventario2.size(); i++) 
+        {
+                Element node2 = (Element) listaInventario2.get(i);
+                //System.out.println("producto nuevo " + node.getChildText("nombre"));
+                boolean aux2 = this.buscar(node2.getChildText("nombre"), "listaProductos");
+                //System.out.println(aux);
+                if (aux2 == false)
+                {
+                    //System.out.println("dentro del if" + node.getChildText("nombre"));
+                    System.out.println("NO ENCONTRE EN LISTA PRODUCTO"+ node2.getChildText("nombre"));
+                    this.actualizarStatus(sucursal, node2.getChildText("nombre"));
+                    //this.agregarProductoInventario(node.getChildText("nombre"), node.getChildText("descripcion"), node.getChildText("costo"), sucursal);
+                }
 }
+    }
  
     
     public boolean agregarProductoInventario(String nombre, String descripcion, String costo, String sucursal) {
@@ -292,6 +362,9 @@ public class XMLInventario {
             elPrecio.addContent(costo);
             elProducto.addContent(laCantidad);
             laCantidad.addContent("0");
+            elProducto.addContent(elStatus);
+            elStatus.addContent("Activo");
+         
 
             
             try {

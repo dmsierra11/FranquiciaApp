@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <nodo>
-    <ip>localhost</ip>
-    <puerto>11000</puerto>
-    <nombre>sucursal2</nombre>
+    <ip>192.168.1.2</ip>
+    <puerto>10000</puerto>
+    <nombre>sucursal1</nombre>
   </nodo>
 </root>
 

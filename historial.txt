@@ -1,1 +1,2 @@
 listaProductos.xml
+nodoCoordinador.xml
