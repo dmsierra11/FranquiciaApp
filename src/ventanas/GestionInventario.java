@@ -1,11 +1,11 @@
 package ventanas;
 
+import franquiciaapp.ActualizarInventario;
 import franquiciaapp.Inventario;
 import franquiciaapp.Nodo;
 import franquiciaapp.XMLInventario;
 import franquiciaapp.XMLNodoCoordinador;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -27,30 +27,20 @@ public class GestionInventario extends javax.swing.JFrame {
     private String archivo = "inventarioProductos.xml";
     private String producto;
     private Socket cliente;
-    private String sucursal;
 
     /**
      * Creates new form GestionInventario
      */
     public GestionInventario() {
         initComponents();
-//        XMLInventario xml = new XMLInventario();
-//        xml.listarInventario(this, archivo);
-//        
+        XMLInventario xml = new XMLInventario();
+        xml.listarInventario(this, archivo);
     }
     
     public GestionInventario(String sucursal) {
         initComponents();
-        XMLInventario xml = new XMLInventario(sucursal);
-        this.sucursal = sucursal;
-        
-        File f = new File(sucursal+".xml");
-        if (f.exists() == true) 
-              xml.LeerInventario(sucursal);
-        else
-              xml.CrearInventario(sucursal);   
-        
-        xml.listarInventario(this, sucursal);
+        XMLInventario xml = new XMLInventario();
+        xml.listarInventario(this, archivo);
     }
 
     /**
@@ -140,21 +130,35 @@ public class GestionInventario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCrearActionPerformed
-         int selectedRow = this.gestor.getSelectedRow();
-        if (selectedRow != -1) {
-            String producto = (String) this.gestor.getModel().getValueAt(selectedRow, 0);
-             String cantidad = (String) this.gestor.getModel().getValueAt(selectedRow, 3);
-             XMLInventario xml = new XMLInventario(sucursal);
-             xml.actualizarInventario(sucursal, producto,cantidad);
-             
-        } else {
-            JOptionPane.showMessageDialog(null, "No ha seleccionado ningun producto", "ERROR", JOptionPane.ERROR_MESSAGE);
+        XMLNodoCoordinador nodoCoord = new XMLNodoCoordinador();
+        Nodo coordinador = nodoCoord.getCoordinador();
+
+        try {
+            System.out.println("Imprimiendo" + coordinador.getIp() + " " + coordinador.getPuerto());
+
+            this.cliente = new Socket(coordinador.getIp(), Integer.valueOf(coordinador.getPuerto()));
+            PrintWriter salida = new PrintWriter(this.cliente.getOutputStream(), true);
+            BufferedReader entrada = new BufferedReader(new InputStreamReader(this.cliente.getInputStream()));
+
+            //java.net.InetAddress i = java.net.InetAddress.getLocalHost();
+
+            salida.println(coordinador.getSucursal());
+
+            salida.close();
+            entrada.close();
+            this.cliente.close();
+
+        } catch (Exception e) {
+            System.out.println("Problemas al enviar el mensaje");
+            e.printStackTrace();
         }
     }//GEN-LAST:event_jBCrearActionPerformed
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
 
         if (this.gestor.getSelectedRow() != -1) {
+            ActualizarInventario ventanaActualizarInventario = new ActualizarInventario(this);
+            ventanaActualizarInventario.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningun producto", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
