@@ -41,6 +41,7 @@ public class GestionInventario extends javax.swing.JFrame {
     public GestionInventario(String sucursal) {
         initComponents();
 <<<<<<< HEAD
+<<<<<<< HEAD
         XMLInventario xml = new XMLInventario(sucursal);
         this.sucursal = sucursal;
         
@@ -51,6 +52,10 @@ public class GestionInventario extends javax.swing.JFrame {
               xml.CrearInventario(sucursal);   
         
         xml.listarInventario(this, sucursal);
+=======
+        XMLInventario xml = new XMLInventario();
+        xml.listarInventario(this, archivo);
+>>>>>>> parent of 9ff0213... xml inventario
 =======
         XMLInventario xml = new XMLInventario();
         xml.listarInventario(this, archivo);
