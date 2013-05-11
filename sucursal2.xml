@@ -4,7 +4,7 @@
     <nombre>Harina</nombre>
     <descripcion>Harina Juana</descripcion>
     <costo>20</costo>
-    <cantidad>400</cantidad>
+    <cantidad>0</cantidad>
   </producto>
   <producto>
     <nombre>Azucar</nombre>
