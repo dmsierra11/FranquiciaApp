@@ -25,3 +25,9 @@ nb-configuration.xml
 =======
 .DS_Store
 >>>>>>> ,,
+
+*.properties
+
+nbproject/private/private.properties
+
+*.properties
