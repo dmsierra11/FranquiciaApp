@@ -1,11 +1,13 @@
 package Sockets;
 
+import franquiciaapp.Historial;
 import java.io.DataInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  *
@@ -51,7 +53,11 @@ public class Servidor implements Runnable {
                     }
                     output.close();
                 } else {
-                    System.out.println(estado);
+                    ArrayList<String> archivos = new Historial().leerHistorial();
+                    //replico cada archivo que esta pendiente
+                    for (int i = 0; i < archivos.size(); i++) {
+                        new Thread(new Replicador(archivos.get(i))).start();
+                    }
                 }
                 socketServicio.close();
             }
