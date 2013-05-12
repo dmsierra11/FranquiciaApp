@@ -20,5 +20,10 @@
     <ubicacion>Puerto La Cruz</ubicacion>
     <telefono>1234456</telefono>
   </sucursal>
+  <sucursal>
+    <nombre>sucursal4</nombre>
+    <ubicacion>La Guaira</ubicacion>
+    <telefono>1234543</telefono>
+  </sucursal>
 </root>
 

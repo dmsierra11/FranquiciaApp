@@ -1,37 +1,37 @@
 *.class
+ 
+Package Files #
 
-# Package Files #
 *.jar
+
 *.war
+
 *.ear
 
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-nbactions.xml
-nb-configuration.xml
-.DS_Store
-
-<<<<<<< HEAD
-# Package Files #
-*.jar
-*.war
-*.ear
 *.properties
+
 *.form
-/dist/
-=======
+
+*.xml
+
+dist/
+build/
+
 .DS_Store
->>>>>>> ,,
+
+
 
 *.properties
+
 
 nbproject/private/private.properties
 
+
 *.properties
 
-nbproject/project.properties
 
 nbproject/project.properties
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
