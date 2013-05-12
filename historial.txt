@@ -1,3 +1,1 @@
 listaProductos.xml
-listaSucursales.xml
-sucursal4.xml

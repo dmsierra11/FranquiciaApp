@@ -46,9 +46,14 @@ public class GestionInventario extends javax.swing.JFrame {
         
         File f = new File(sucursal+".xml");
         if (f.exists() == true) 
+                
+        {
+            System.out.println("AQUI ESTOY ");
               xml.LeerInventario(sucursal);
-        else
-              xml.CrearInventario(sucursal);   
+        }        
+else
+            //System.out.println("else");  
+            xml.CrearInventario(sucursal);   
         
         xml.listarInventario(this, sucursal);
     }
@@ -78,7 +83,7 @@ public class GestionInventario extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Descripcion", "Costo", "Cantidad"
+                "Nombre", "Descripcion", "Costo", "Cantidad", "Estado"
             }
         ));
         jScrollPane1.setViewportView(gestor);
@@ -114,7 +119,7 @@ public class GestionInventario extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel2.setText("Inventario SuperMercados XYZ");
-        jLabel2.setBounds(50, 60, 270, 24);
+        jLabel2.setBounds(50, 60, 285, 22);
         jLayeredPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondos-verdes.jpg"))); // NOI18N
@@ -204,8 +209,8 @@ public class GestionInventario extends javax.swing.JFrame {
      * @param cantidad
      * @param status
      */
-    public void agregarfila(String nombre, String descripcion, String costo, String cantidad) {
-        ((DefaultTableModel) this.gestor.getModel()).addRow(new Object[]{nombre, descripcion, costo, cantidad});
+    public void agregarfila(String nombre, String descripcion, String costo, String cantidad, String status) {
+        ((DefaultTableModel) this.gestor.getModel()).addRow(new Object[]{nombre, descripcion, costo, cantidad, status});
     }
 
     public ArrayList<String> getInventario() {

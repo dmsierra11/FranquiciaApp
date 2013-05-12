@@ -22,7 +22,7 @@
     <nombre>Pan</nombre>
     <descripcion>Pan</descripcion>
     <costo>100</costo>
-    <cantidad>30</cantidad>
+    <cantidad>0</cantidad>
   </producto>
   <producto>
     <nombre>Caraotas</nombre>
