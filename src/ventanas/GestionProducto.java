@@ -5,6 +5,7 @@
 package ventanas;
 
 import Sockets.Replicador;
+import franquiciaapp.FrameImagen;
 import franquiciaapp.Producto;
 import franquiciaapp.XMLProducto;
 import java.io.File;
@@ -24,6 +25,7 @@ public class GestionProducto extends javax.swing.JFrame {
     int selected = -1;
     private String archivo = "listaProductos.xml";
     private String producto;
+     String imagen;
 
     public GestionProducto() {
         initComponents();
@@ -47,6 +49,7 @@ public class GestionProducto extends javax.swing.JFrame {
         jBModificar = new javax.swing.JButton();
         jBCrear = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -81,7 +84,7 @@ public class GestionProducto extends javax.swing.JFrame {
                 eliminarActionPerformed(evt);
             }
         });
-        eliminar.setBounds(420, 270, 120, 60);
+        eliminar.setBounds(340, 270, 120, 60);
         jLayeredPane1.add(eliminar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jBModificar.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
@@ -92,7 +95,7 @@ public class GestionProducto extends javax.swing.JFrame {
                 jBModificarActionPerformed(evt);
             }
         });
-        jBModificar.setBounds(260, 270, 130, 60);
+        jBModificar.setBounds(190, 270, 130, 60);
         jLayeredPane1.add(jBModificar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jBCrear.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
@@ -103,12 +106,23 @@ public class GestionProducto extends javax.swing.JFrame {
                 jBCrearActionPerformed(evt);
             }
         });
-        jBCrear.setBounds(60, 270, 170, 60);
+        jBCrear.setBounds(10, 270, 170, 60);
         jLayeredPane1.add(jBCrear, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/carrinho supermercado.png"))); // NOI18N
         jLabel1.setBounds(210, 0, 90, 100);
         jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ojo.png"))); // NOI18N
+        jButton1.setText("VerImagen");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jButton1.setBounds(470, 270, 110, 60);
+        jLayeredPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel2.setText("SuperMercados XYZ");
@@ -140,8 +154,8 @@ public class GestionProducto extends javax.swing.JFrame {
      */
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
         // TODO add your handling code here:
-        System.out.print("estoy aqui");
-        System.out.print(selected);
+        //System.out.print("estoy aqui");
+        //System.out.print(selected);
 
         selected = gestor.getSelectedRow();
 
@@ -159,9 +173,9 @@ public class GestionProducto extends javax.swing.JFrame {
             new Thread(replicador).start();
 
         } else {
-            System.out.print("AHORA ACA");
+            //System.out.print("AHORA ACA");
         }
-        System.out.print(selected);
+        //System.out.print(selected);
 
     }//GEN-LAST:event_eliminarActionPerformed
 
@@ -180,6 +194,25 @@ public class GestionProducto extends javax.swing.JFrame {
         RegistroProducto Registro = new RegistroProducto();
         Registro.setVisible(true);
     }//GEN-LAST:event_jBCrearActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+          int selectedRow = this.gestor.getSelectedRow();
+        if (selectedRow != -1) {
+          imagen = (String) this.gestor.getModel().getValueAt(selectedRow, 3);
+            
+            
+            FrameImagen Frame = new FrameImagen(imagen);
+            Frame.main(imagen);
+            
+            
+          
+          
+             
+        } else {
+            JOptionPane.showMessageDialog(null, "No ha seleccionado ningun producto", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,6 +292,7 @@ public class GestionProducto extends javax.swing.JFrame {
     private javax.swing.JTable gestor;
     private javax.swing.JButton jBCrear;
     private javax.swing.JButton jBModificar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
