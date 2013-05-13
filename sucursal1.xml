@@ -36,7 +36,7 @@
     <nombre>Cafe</nombre>
     <descripcion>Cafe Fama de America</descripcion>
     <costo>12</costo>
-    <cantidad>18000</cantidad>
+    <cantidad>100</cantidad>
     <status>Activo</status>
     <imagen>cafe.jpg</imagen>
   </producto>
