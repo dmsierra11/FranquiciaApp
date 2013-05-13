@@ -18,23 +18,27 @@ import java.util.logging.Logger;
 public class Historial {
 
     private ArrayList<String> historial;
-    
-    public Historial(){
+
+    public Historial() {
         historial = new ArrayList<String>();
     }
 
     public void escribirHistorial(String nombreArchivo) {
-        File f;
         boolean existe;
 
-        if (!existeAccion(nombreArchivo)) {
-
-            if (!new File("historial.txt").exists()) {
-                f = new File("historial.txt");
-                existe = false;
-            } else {
-                existe = true;
+        if (!new File("historial.txt").exists()) {
+            File f = new File("historial.txt");
+            try {
+                f.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(Historial.class.getName()).log(Level.SEVERE, null, ex);
             }
+            existe = false;
+        } else {
+            existe = true;
+        }
+
+        if (!existeAccion(nombreArchivo)) {
 
             try {
 
