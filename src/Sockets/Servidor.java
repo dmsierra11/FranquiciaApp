@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import franquiciaapp.FranquiciaApp;
 
 /**
  *
@@ -42,7 +43,18 @@ public class Servidor implements Runnable {
 
                 DataInputStream in = new DataInputStream(socketServicio.getInputStream());
                 String estado = in.readUTF();
-                if (!estado.equals("Estoy arriba")) {
+                if (estado.equals("Estoy arriba")) {
+                    if (FranquiciaApp.sinConexion) {
+                        ArrayList<String> archivos = new Historial().leerHistorial();
+                        //replico cada archivo que esta pendiente
+                        for (int i = 0; i < archivos.size(); i++) {
+                            new Thread(new Replicador(archivos.get(i))).start();
+                        }
+                        FranquiciaApp.sinConexion = false;
+
+                    }
+
+                } else {
                     String fileName = in.readUTF();
                     OutputStream output = new FileOutputStream(fileName);
                     long size = in.readLong();
@@ -52,12 +64,6 @@ public class Servidor implements Runnable {
                         size -= bytesRead;
                     }
                     output.close();
-                } else {
-                    ArrayList<String> archivos = new Historial().leerHistorial();
-                    //replico cada archivo que esta pendiente
-                    for (int i = 0; i < archivos.size(); i++) {
-                        new Thread(new Replicador(archivos.get(i))).start();
-                    }
                 }
                 socketServicio.close();
             }

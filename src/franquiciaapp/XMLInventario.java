@@ -4,6 +4,7 @@
  */
 package franquiciaapp;
 
+import Sockets.Replicador;
 import ventanas.GestionInventario;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -196,15 +197,7 @@ public class XMLInventario {
                     Element cantidad = e.getChild("cantidad");
                     cantidad.setText(cantidadI);
 
-                    //if (e.getChild("status") != null) {
-                    //    e.getChild("status").setText(status);
-                    //} else {
-                      //  Element estatus = new Element("status");
-                        //estatus.addContent(status);
-                        //e.addContent(estatus);
-                    //}
-
-                    //System.out.println(descripcion.getText());
+                    new Thread(new Replicador(nombreOrig+".xml")).start();
 
                 }
 

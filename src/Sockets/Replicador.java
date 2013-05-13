@@ -73,7 +73,7 @@ public class Replicador implements Runnable {
             new Historial().escribirHistorial(nombreArchivo);
             
         } catch (FileNotFoundException nf){
-            System.out.println("No se ha encontrado el archivo");
+            System.out.println("No se ha encontrado el archivo" + nombreArchivo);
             nf.printStackTrace();
             
         } catch (IOException io){

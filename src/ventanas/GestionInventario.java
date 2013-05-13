@@ -151,6 +151,8 @@ else
              String cantidad = (String) this.gestor.getModel().getValueAt(selectedRow, 3);
              XMLInventario xml = new XMLInventario(sucursal);
              xml.actualizarInventario(sucursal, producto,cantidad);
+             JOptionPane.showMessageDialog(null, "Producto creado correctamente", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+             this.dispose();
              
         } else {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningun producto", "ERROR", JOptionPane.ERROR_MESSAGE);
