@@ -8,7 +8,8 @@ import javax.swing.JOptionPane;
 import javax.swing.*;
 
 /**
- * Clase que permite la actualización de datos de los productos en la franquicia.
+ * Clase que permite la actualización de datos de los productos en la
+ * franquicia.
  *
  * @author daniel
  */
@@ -20,12 +21,11 @@ public class ActualizarProducto extends javax.swing.JFrame {
     private String vacio = null;
     private String producto = "";
     private GestionProducto padre = null;
-JFileChooser filechooser;
+    JFileChooser filechooser;
     File imagencita;
-     String[] nombreImagen;
-     String imagenName;
-     
-     
+    String[] nombreImagen;
+    String imagenName;
+
     public ActualizarProducto() {
         initComponents();
         //XMLProducto xml = new XMLProducto();
@@ -205,7 +205,7 @@ JFileChooser filechooser;
                 this.dispose();
                 JOptionPane.showMessageDialog(null, "Producto modificado correctamente", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
 
-                
+
                 //replica el archivo de productos para actualizar
                 Replicador replicador = new Replicador("listaProductos.xml");
                 new Thread(replicador).start();
@@ -224,27 +224,26 @@ JFileChooser filechooser;
 
     private void examinarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examinarActionPerformed
         // TODO add your handling code here:
-                                               
-     
+
+
         filechooser = new JFileChooser();
         int value = filechooser.showOpenDialog(this);
-        if (value == JFileChooser.APPROVE_OPTION)
-        {
+        if (value == JFileChooser.APPROVE_OPTION) {
             System.out.println(filechooser.getApproveButtonText());
-            
+
             imagencita = filechooser.getSelectedFile();
             System.out.println(imagencita.toString());
-           
+
             nombreImagen = imagencita.toString().split("/");
-            
+
             System.out.println(nombreImagen[7]);
-            
+
             imagenName = nombreImagen[7];
-                    
+
             imagen.setText(imagenName);
         }
-       
-                                            
+
+
 
     }//GEN-LAST:event_examinarActionPerformed
 
@@ -300,7 +299,7 @@ JFileChooser filechooser;
         jTNombre.setText(productoSelec.getNombre());
         jTDescripcion.setText(productoSelec.getDescripcion());
         jTCosto.setText(productoSelec.getCosto());
-        imagen.setText(productoSelec.getFoto());        
+        imagen.setText(productoSelec.getFoto());
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

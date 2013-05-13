@@ -55,7 +55,8 @@ public class Servidor implements Runnable {
                     }
 
                 } else {
-                    String fileName = in.readUTF();
+                    System.out.println("RECIBIENDO..");
+                    String fileName = estado;
                     OutputStream output = new FileOutputStream(fileName);
                     long size = in.readLong();
                     byte[] buffer = new byte[1024];

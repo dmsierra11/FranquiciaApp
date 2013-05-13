@@ -28,7 +28,7 @@ public class FranquiciaApp {
         Servidor servidor = new Servidor(args[0]);
         new Thread(servidor).start();
          
-        //new Thread(new Replicador("Estoy arriba")).start();
+        new Thread(new Replicador("Estoy arriba")).start();
     }
     
         

@@ -37,13 +37,17 @@ public class Replicador implements Runnable {
 
     @Override
     public void run() {
-        this.enviarXML();
+        if (!this.nombreArchivo.equals("Estoy arriba")) {
+            this.enviarXML();
+        } else {
+            this.enviarSignal();
+        }
     }
 
     public void enviarXML() {
         System.out.println("enviar xml");
         try {
-            
+
             this.cliente = new Socket(this.ip, this.puerto);
 
             // enviar archivo  
@@ -67,17 +71,40 @@ public class Replicador implements Runnable {
             this.cliente.close();
 
         } catch (ConnectException ce) {
-            System.out.println("No se encuentra el HOST"); 
-            System.out.println(this.ip);
-            FranquiciaApp.sinConexion = true;
-            new Historial().escribirHistorial(nombreArchivo);
-            
-        } catch (FileNotFoundException nf){
+            if (!nombreArchivo.equals("Estoy arriba")) {
+                System.out.println("No se encuentra el HOST");
+                System.out.println(this.ip);
+                FranquiciaApp.sinConexion = true;
+                new Historial().escribirHistorial(nombreArchivo);
+            }
+
+        } catch (FileNotFoundException nf) {
             System.out.println("No se ha encontrado el archivo" + nombreArchivo);
             nf.printStackTrace();
-            
-        } catch (IOException io){
+
+        } catch (IOException io) {
             io.printStackTrace();
-        } 
+        }
+    }
+    
+    public void enviarSignal() {
+        try {
+
+            this.cliente = new Socket(this.ip, this.puerto);
+
+            OutputStream os = this.cliente.getOutputStream();
+
+            DataOutputStream dos = new DataOutputStream(os);
+            dos.writeUTF("Estoy arriba");
+            dos.flush();
+
+            this.cliente.close();
+
+        } catch (ConnectException ce) {
+            System.out.println("No se encuentra el HOST");
+
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
     }
 }
