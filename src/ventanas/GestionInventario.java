@@ -162,10 +162,15 @@ else
          int selectedRow = this.gestor.getSelectedRow();
         if (selectedRow != -1) {
             String producto = (String) this.gestor.getModel().getValueAt(selectedRow, 0);
+            String descripcion = (String) this.gestor.getModel().getValueAt(selectedRow, 1);
+            String costo = (String) this.gestor.getModel().getValueAt(selectedRow, 2);
              String cantidad = (String) this.gestor.getModel().getValueAt(selectedRow, 3);
+             String stado = (String) this.gestor.getModel().getValueAt(selectedRow, 4);
+             String imagen = (String) this.gestor.getModel().getValueAt(selectedRow, 5);
+
              XMLInventario xml = new XMLInventario(sucursal);
-             xml.actualizarInventario(sucursal, producto,cantidad);
-             JOptionPane.showMessageDialog(null, "Producto creado correctamente", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+             xml.actualizarInventario(sucursal, producto,cantidad, stado, descripcion, imagen, costo);
+             JOptionPane.showMessageDialog(null, "Producto actualizado correctamente", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
              this.dispose();
              
         } else {

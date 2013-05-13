@@ -97,6 +97,7 @@ public class ActualizarProducto extends javax.swing.JFrame {
         jLabel1.setBounds(130, 100, 200, 30);
         jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        jTNombre.setEnabled(false);
         jTNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTNombreActionPerformed(evt);

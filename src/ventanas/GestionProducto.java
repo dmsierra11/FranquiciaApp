@@ -7,6 +7,7 @@ package ventanas;
 import Sockets.Replicador;
 import franquiciaapp.FrameImagen;
 import franquiciaapp.Producto;
+import franquiciaapp.XMLInventario;
 import franquiciaapp.XMLProducto;
 import java.io.File;
 import javax.swing.JOptionPane;
@@ -159,7 +160,6 @@ public class GestionProducto extends javax.swing.JFrame {
 
         selected = gestor.getSelectedRow();
 
-        System.out.print(gestor.getSelectedRow());
         if (selected >= 0) {
             String nombrearchivo = (String) gestor.getValueAt(selected, 0);
             System.out.print(nombrearchivo);
@@ -167,7 +167,11 @@ public class GestionProducto extends javax.swing.JFrame {
             xml.borrarProducto(archivo, nombrearchivo);
 
             ((DefaultTableModel) this.gestor.getModel()).removeRow(selected);
-
+           
+            
+            XMLInventario xml2 = new XMLInventario("sucursal1");
+             xml2.verificarInactivos("sucursal1", nombrearchivo);
+             
             //replica el archivo de productos para actualizar
             Replicador replicador = new Replicador("listaProductos.xml");
             new Thread(replicador).start();

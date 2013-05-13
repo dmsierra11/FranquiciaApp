@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
   <producto>
-    <nombre>Harina</nombre>
-    <descripcion>Harina Pan</descripcion>
-    <costo>200</costo>
-    <imagen>harina.jpg</imagen>
+    <nombre>Jamon</nombre>
+    <descripcion>Plumrose</descripcion>
+    <costo>123</costo>
+    <imagen>jamon.jpg</imagen>
   </producto>
   <producto>
-    <nombre>Azucar</nombre>
-    <descripcion>Azucar Morena</descripcion>
-    <costo>25</costo>
-    <imagen>azucar.jpg</imagen>
+    <nombre>Arroz</nombre>
+    <descripcion>Primor</descripcion>
+    <costo>123</costo>
+    <imagen>arroz.jpg</imagen>
   </producto>
   <producto>
-    <nombre>Cebolla</nombre>
-    <descripcion>Cebolla</descripcion>
-    <costo>100</costo>
-    <imagen>cebolla.jpg</imagen>
+    <nombre>Cereal</nombre>
+    <descripcion>Chocokrispies</descripcion>
+    <costo>123</costo>
+    <imagen>cereal.jpg</imagen>
   </producto>
   <producto>
     <nombre>Caraotas</nombre>
-    <descripcion>Caraotas</descripcion>
-    <costo>100</costo>
+    <descripcion>Negras</descripcion>
+    <costo>123</costo>
     <imagen>caraotas.jpg</imagen>
   </producto>
   <producto>
-    <nombre>Cafe</nombre>
-    <descripcion>Cafe Fama de America</descripcion>
-    <costo>12</costo>
-    <imagen>cafe.jpg</imagen>
+    <nombre>Queso</nombre>
+    <descripcion>Paisa</descripcion>
+    <costo>123</costo>
+    <imagen>queso.jpg</imagen>
   </producto>
 </root>
 
