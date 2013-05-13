@@ -356,7 +356,7 @@ public class XMLInventario {
                             
                             System.out.println("cantidad no cero");
                     //this.actualizarStatus(sucursal, node2.getChildText("nombre"));
-                    JOptionPane.showMessageDialog(null, "Se ha inactivado "+ nombreP, "ERROR", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Se ha inactivado "+ nombreP+ " en "+sucursal, "ERROR", JOptionPane.ERROR_MESSAGE);
                         break;
                         } 
                        else
