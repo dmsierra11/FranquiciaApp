@@ -1,15 +1,27 @@
 package ventanas;
 
+import franquiciaapp.FrameImagen;
 import franquiciaapp.Inventario;
 import franquiciaapp.Nodo;
+import franquiciaapp.PanelImagen;
 import franquiciaapp.XMLInventario;
 import franquiciaapp.XMLNodoCoordinador;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,6 +40,9 @@ public class GestionInventario extends javax.swing.JFrame {
     private String producto;
     private Socket cliente;
     private String sucursal;
+     
+      
+      String imagen;
 
     /**
      * Creates new form GestionInventario
@@ -70,6 +85,7 @@ else
         jScrollPane1 = new javax.swing.JScrollPane();
         gestor = new javax.swing.JTable();
         jBCrear = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -97,8 +113,19 @@ else
                 jBCrearActionPerformed(evt);
             }
         });
-        jBCrear.setBounds(200, 270, 170, 60);
+        jBCrear.setBounds(60, 280, 170, 60);
         jLayeredPane1.add(jBCrear, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ojo.png"))); // NOI18N
+        jButton1.setText("VerImagen");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jButton1.setBounds(420, 280, 110, 60);
+        jLayeredPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/carrinho supermercado.png"))); // NOI18N
         jLabel1.setBounds(330, 0, 90, 100);
@@ -145,6 +172,29 @@ else
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningun producto", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jBCrearActionPerformed
+
+    
+     
+    
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         int selectedRow = this.gestor.getSelectedRow();
+        if (selectedRow != -1) {
+          imagen = (String) this.gestor.getModel().getValueAt(selectedRow, 5);
+            
+            
+            FrameImagen Frame = new FrameImagen(imagen);
+            Frame.main(imagen);
+            
+            
+          
+          
+             
+        } else {
+            JOptionPane.showMessageDialog(null, "No ha seleccionado ningun producto", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,6 +271,7 @@ else
     private void gestorMouseClicked(java.awt.event.MouseEvent evt) {
         this.selected = gestor.getSelectedRow();
         System.out.print(selected);
+        System.out.println("click");
 
 
         // TODO add your handling code here:
@@ -229,6 +280,7 @@ else
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable gestor;
     private javax.swing.JButton jBCrear;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
