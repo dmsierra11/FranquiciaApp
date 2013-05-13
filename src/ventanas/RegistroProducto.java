@@ -7,6 +7,7 @@ package ventanas;
 import Sockets.Replicador;
 import franquiciaapp.XMLProducto;
 import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +21,11 @@ public class RegistroProducto extends javax.swing.JFrame {
      * Creates new form RegistroProducto
      */
     private String vacio = null;
+    JFileChooser filechooser;
+    File imagencita;
+     String[] nombreImagen;
+     String imagenName;
+    
 
     public RegistroProducto() {
         initComponents();
@@ -45,7 +51,7 @@ public class RegistroProducto extends javax.swing.JFrame {
         descripcion = new javax.swing.JTextField();
         costo = new javax.swing.JTextField();
         registrar = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        imagen = new javax.swing.JTextField();
         examinar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
@@ -70,12 +76,12 @@ public class RegistroProducto extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel6.setText("Imagen: ");
-        jLabel6.setBounds(150, 240, 60, 18);
+        jLabel6.setBounds(150, 240, 60, 16);
         jLayeredPane1.add(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel7.setText("Costo:");
-        jLabel7.setBounds(150, 270, 45, 18);
+        jLabel7.setBounds(150, 270, 45, 16);
         jLayeredPane1.add(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
@@ -107,16 +113,16 @@ public class RegistroProducto extends javax.swing.JFrame {
                 registrarActionPerformed(evt);
             }
         });
-        registrar.setBounds(220, 310, 97, 23);
+        registrar.setBounds(220, 310, 97, 29);
         jLayeredPane1.add(registrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        imagen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                imagenActionPerformed(evt);
             }
         });
-        jTextField1.setBounds(240, 230, 150, 20);
-        jLayeredPane1.add(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        imagen.setBounds(240, 230, 150, 28);
+        jLayeredPane1.add(imagen, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         examinar.setText("...");
         examinar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -163,7 +169,7 @@ public class RegistroProducto extends javax.swing.JFrame {
 
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
         // TODO add your handling code here:
-        if ((this.nombre.getText().equals("")) || (this.descripcion.getText().equals("")) || (this.costo.getText().equals(""))) {
+        if ((this.nombre.getText().equals("")) || (this.descripcion.getText().equals("")) || (this.costo.getText().equals("")) || (this.imagen.getText().equals(""))) {
             JOptionPane.showMessageDialog(null, "Algun campo esta VACIO", "ERROR", JOptionPane.ERROR_MESSAGE);
             RegistroProducto Registro = new RegistroProducto();
             Registro.setVisible(true);
@@ -172,7 +178,7 @@ public class RegistroProducto extends javax.swing.JFrame {
 
 
             XMLProducto productos = new XMLProducto();
-            boolean flag = productos.agregarProducto(this.nombre.getText(), this.descripcion.getText(), this.costo.getText());
+            boolean flag = productos.agregarProducto(this.nombre.getText(), this.descripcion.getText(), this.costo.getText(), this.imagen.getText());
             if (flag = false) {
                 //else    
 
@@ -200,16 +206,35 @@ public class RegistroProducto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_registrarActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void imagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imagenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_imagenActionPerformed
 
     private void examinarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examinarActionPerformed
         // TODO add your handling code here:
+        filechooser = new JFileChooser();
+        int value = filechooser.showOpenDialog(this);
+        if (value == JFileChooser.APPROVE_OPTION)
+        {
+            System.out.println(filechooser.getApproveButtonText());
+            
+            imagencita = filechooser.getSelectedFile();
+            System.out.println(imagencita.toString());
+           
+            nombreImagen = imagencita.toString().split("/");
+            
+            System.out.println(nombreImagen[7]);
+            
+            imagenName = nombreImagen[7];
+                    
+            imagen.setText(imagenName);
+        }
+       
     }//GEN-LAST:event_examinarActionPerformed
 
     private void examinarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_examinarMouseClicked
         // TODO add your handling code here:
+      
     }//GEN-LAST:event_examinarMouseClicked
 
     /**
@@ -250,6 +275,7 @@ public class RegistroProducto extends javax.swing.JFrame {
     private javax.swing.JTextField costo;
     private javax.swing.JTextField descripcion;
     private javax.swing.JButton examinar;
+    private javax.swing.JTextField imagen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -258,7 +284,6 @@ public class RegistroProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField nombre;
     private javax.swing.JButton registrar;
     // End of variables declaration//GEN-END:variables

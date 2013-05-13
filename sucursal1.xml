@@ -2,10 +2,11 @@
 <root>
   <producto>
     <nombre>Harina</nombre>
-    <descripcion>Harina Juana</descripcion>
-    <costo>20</costo>
+    <descripcion>Harina Pan</descripcion>
+    <costo>200</costo>
     <cantidad>0</cantidad>
     <status>Activo</status>
+    <imagen>harina.jpg</imagen>
   </producto>
   <producto>
     <nombre>Azucar</nombre>
@@ -13,6 +14,7 @@
     <costo>25</costo>
     <cantidad>0</cantidad>
     <status>Activo</status>
+    <imagen>azucar.jpg</imagen>
   </producto>
   <producto>
     <nombre>Cebolla</nombre>
@@ -20,13 +22,7 @@
     <costo>100</costo>
     <cantidad>0</cantidad>
     <status>Activo</status>
-  </producto>
-  <producto>
-    <nombre>Pan</nombre>
-    <descripcion>Pan</descripcion>
-    <costo>100</costo>
-    <cantidad>0</cantidad>
-    <status>Activo</status>
+    <imagen>cebolla.jpg</imagen>
   </producto>
   <producto>
     <nombre>Caraotas</nombre>
@@ -34,20 +30,15 @@
     <costo>100</costo>
     <cantidad>0</cantidad>
     <status>Activo</status>
+    <imagen>caraotas.jpg</imagen>
   </producto>
   <producto>
-    <nombre>Naranja</nombre>
-    <descripcion>Naranja</descripcion>
-    <costo>20</costo>
-    <cantidad>20</cantidad>
+    <nombre>Cafe</nombre>
+    <descripcion>Cafe Fama de America</descripcion>
+    <costo>12</costo>
+    <cantidad>0</cantidad>
     <status>Activo</status>
-  </producto>
-  <producto>
-    <nombre>Patillas</nombre>
-    <descripcion>Patillas</descripcion>
-    <costo>18</costo>
-    <cantidad>103</cantidad>
-    <status>Activo</status>
+    <imagen>cafe.jpg</imagen>
   </producto>
 </root>
 

@@ -57,11 +57,11 @@ public class GestionProducto extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Descripcion", "Imagen", "Costo", "Estatus"
+                "Nombre", "Descripcion", "Costo", "Imagen"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -112,7 +112,7 @@ public class GestionProducto extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel2.setText("SuperMercados XYZ");
-        jLabel2.setBounds(50, 60, 177, 24);
+        jLabel2.setBounds(50, 60, 184, 22);
         jLayeredPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondos-verdes.jpg"))); // NOI18N
@@ -224,8 +224,8 @@ public class GestionProducto extends javax.swing.JFrame {
      * @param foto
      * @param costo
      */
-    public void agregarfila(String nombre, String descripcion, String foto, String costo, String status) {
-        ((DefaultTableModel) this.gestor.getModel()).addRow(new Object[]{nombre, descripcion, foto, costo, status});
+    public void agregarfila(String nombre, String descripcion, String foto, String costo, String imagen) {
+        ((DefaultTableModel) this.gestor.getModel()).addRow(new Object[]{nombre, descripcion, costo, imagen});
 
     }
 
@@ -233,12 +233,11 @@ public class GestionProducto extends javax.swing.JFrame {
         int selectedRow = this.gestor.getSelectedRow();
         String productoNombre = (String) this.gestor.getModel().getValueAt(selectedRow, 0);
         String productoDesc = (String) this.gestor.getModel().getValueAt(selectedRow, 1);
-        String productoFoto = (String) this.gestor.getModel().getValueAt(selectedRow, 2);
-        String productoCosto = (String) this.gestor.getModel().getValueAt(selectedRow, 3);
-        String productoStatus = (String) this.gestor.getModel().getValueAt(selectedRow, 4);
+        String productoCosto = (String) this.gestor.getModel().getValueAt(selectedRow, 2);
+        String productoImagen = (String) this.gestor.getModel().getValueAt(selectedRow, 3);
 
-        Producto product = new Producto(productoNombre, productoDesc, productoFoto,
-                productoCosto, productoStatus);
+        Producto product = new Producto(productoNombre, productoDesc,
+                productoCosto, productoImagen);
 
         return product;
     }

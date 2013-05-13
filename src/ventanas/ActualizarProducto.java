@@ -20,7 +20,12 @@ public class ActualizarProducto extends javax.swing.JFrame {
     private String vacio = null;
     private String producto = "";
     private GestionProducto padre = null;
-
+JFileChooser filechooser;
+    File imagencita;
+     String[] nombreImagen;
+     String imagenName;
+     
+     
     public ActualizarProducto() {
         initComponents();
         //XMLProducto xml = new XMLProducto();
@@ -48,15 +53,13 @@ public class ActualizarProducto extends javax.swing.JFrame {
         jLDescripcion = new javax.swing.JLabel();
         jLImagen = new javax.swing.JLabel();
         jLCosto = new javax.swing.JLabel();
-        jLStatus = new javax.swing.JLabel();
-        jCBStatus = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jTNombre = new javax.swing.JTextField();
         jTDescripcion = new javax.swing.JTextField();
         jTCosto = new javax.swing.JTextField();
         jBActualizar = new javax.swing.JButton();
         jBCancelar = new javax.swing.JButton();
-        jTImagen = new javax.swing.JTextField();
+        imagen = new javax.swing.JTextField();
         examinar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
@@ -81,22 +84,13 @@ public class ActualizarProducto extends javax.swing.JFrame {
 
         jLImagen.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLImagen.setText("Imagen: ");
-        jLImagen.setBounds(150, 240, 60, 18);
+        jLImagen.setBounds(150, 240, 60, 16);
         jLayeredPane1.add(jLImagen, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLCosto.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLCosto.setText("Costo:");
-        jLCosto.setBounds(150, 280, 45, 18);
+        jLCosto.setBounds(150, 280, 45, 16);
         jLayeredPane1.add(jLCosto, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jLStatus.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLStatus.setText("Estatus:");
-        jLStatus.setBounds(150, 320, 50, 18);
-        jLayeredPane1.add(jLStatus, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jCBStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Activo", "Inactivo" }));
-        jCBStatus.setBounds(240, 320, 90, 20);
-        jLayeredPane1.add(jCBStatus, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setText("SuperMercados XYZ");
@@ -127,7 +121,7 @@ public class ActualizarProducto extends javax.swing.JFrame {
                 jBActualizarActionPerformed(evt);
             }
         });
-        jBActualizar.setBounds(220, 360, 97, 23);
+        jBActualizar.setBounds(220, 360, 97, 29);
         jLayeredPane1.add(jBActualizar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jBCancelar.setText("Cancelar");
@@ -136,16 +130,16 @@ public class ActualizarProducto extends javax.swing.JFrame {
                 jBCancelarActionPerformed(evt);
             }
         });
-        jBCancelar.setBounds(340, 360, 97, 23);
+        jBCancelar.setBounds(340, 360, 97, 29);
         jLayeredPane1.add(jBCancelar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jTImagen.addActionListener(new java.awt.event.ActionListener() {
+        imagen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTImagenActionPerformed(evt);
+                imagenActionPerformed(evt);
             }
         });
-        jTImagen.setBounds(240, 230, 200, 30);
-        jLayeredPane1.add(jTImagen, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        imagen.setBounds(240, 230, 200, 30);
+        jLayeredPane1.add(imagen, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         examinar.setText("...");
         examinar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -190,7 +184,7 @@ public class ActualizarProducto extends javax.swing.JFrame {
 
     private void jBActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarActionPerformed
         // TODO add your handling code here:
-        if ((this.jTNombre.getText().equals("")) || (this.jTDescripcion.getText().equals("")) || (this.jTCosto.getText().equals(""))) {
+        if ((this.jTNombre.getText().equals("")) || (this.jTDescripcion.getText().equals("")) || (this.jTCosto.getText().equals("")) || (this.imagen.getText().equals(""))) {
             JOptionPane.showMessageDialog(null, "Algun campo esta VACIO", "ERROR", JOptionPane.ERROR_MESSAGE);
             ActualizarProducto Registro = new ActualizarProducto();
             Registro.setVisible(true);
@@ -198,10 +192,9 @@ public class ActualizarProducto extends javax.swing.JFrame {
         } else {
             XMLProducto productos = new XMLProducto();
             boolean flag = productos.actualizarProducto(this.producto, this.jTNombre.getText(),
-                    this.jTDescripcion.getText(), this.jTCosto.getText(), 
-                    this.jCBStatus.getSelectedItem().toString());
+                    this.jTDescripcion.getText(), this.jTCosto.getText(), this.imagen.getText());
             if (flag = false) {
-                JOptionPane.showMessageDialog(null, "No se pudo crear usuario", "ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar Producto", "ERROR", JOptionPane.ERROR_MESSAGE);
                 ActualizarProducto Registro = new ActualizarProducto();
                 Registro.setVisible(true);
                 this.dispose();
@@ -225,12 +218,34 @@ public class ActualizarProducto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBActualizarActionPerformed
 
-    private void jTImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTImagenActionPerformed
+    private void imagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imagenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTImagenActionPerformed
+    }//GEN-LAST:event_imagenActionPerformed
 
     private void examinarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examinarActionPerformed
         // TODO add your handling code here:
+                                               
+     
+        filechooser = new JFileChooser();
+        int value = filechooser.showOpenDialog(this);
+        if (value == JFileChooser.APPROVE_OPTION)
+        {
+            System.out.println(filechooser.getApproveButtonText());
+            
+            imagencita = filechooser.getSelectedFile();
+            System.out.println(imagencita.toString());
+           
+            nombreImagen = imagencita.toString().split("/");
+            
+            System.out.println(nombreImagen[7]);
+            
+            imagenName = nombreImagen[7];
+                    
+            imagen.setText(imagenName);
+        }
+       
+                                            
+
     }//GEN-LAST:event_examinarActionPerformed
 
     private void examinarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_examinarMouseClicked
@@ -285,27 +300,24 @@ public class ActualizarProducto extends javax.swing.JFrame {
         jTNombre.setText(productoSelec.getNombre());
         jTDescripcion.setText(productoSelec.getDescripcion());
         jTCosto.setText(productoSelec.getCosto());
-        jTImagen.setText(productoSelec.getFoto());        
-        jCBStatus.setSelectedItem(productoSelec.getStatus());
+        imagen.setText(productoSelec.getFoto());        
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton examinar;
+    private javax.swing.JTextField imagen;
     private javax.swing.JButton jBActualizar;
     private javax.swing.JButton jBCancelar;
-    private javax.swing.JComboBox jCBStatus;
     private javax.swing.JLabel jLCosto;
     private javax.swing.JLabel jLDescripcion;
     private javax.swing.JLabel jLImagen;
     private javax.swing.JLabel jLNombre;
-    private javax.swing.JLabel jLStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JTextField jTCosto;
     private javax.swing.JTextField jTDescripcion;
-    private javax.swing.JTextField jTImagen;
     private javax.swing.JTextField jTNombre;
     // End of variables declaration//GEN-END:variables
 }

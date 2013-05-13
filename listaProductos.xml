@@ -1,44 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <root>
   <producto>
     <nombre>Harina</nombre>
-    <descripcion>Harina Juana</descripcion>
-    <costo>20</costo>
-    <status>Activo</status>
+    <descripcion>Harina Pan</descripcion>
+    <costo>200</costo>
+    <imagen>harina.jpg</imagen>
   </producto>
   <producto>
     <nombre>Azucar</nombre>
     <descripcion>Azucar Morena</descripcion>
     <costo>25</costo>
-    <status>Activo</status>
+    <imagen>azucar.jpg</imagen>
   </producto>
   <producto>
     <nombre>Cebolla</nombre>
     <descripcion>Cebolla</descripcion>
     <costo>100</costo>
-    <status>Inactivo</status>
-  </producto>
-  <producto>
-    <nombre>Pan</nombre>
-    <descripcion>Pan</descripcion>
-    <costo>100</costo>
-    <status>Activo</status>
+    <imagen>cebolla.jpg</imagen>
   </producto>
   <producto>
     <nombre>Caraotas</nombre>
     <descripcion>Caraotas</descripcion>
     <costo>100</costo>
-    <status>Activo</status>
+    <imagen>caraotas.jpg</imagen>
   </producto>
   <producto>
-    <nombre>Naranja</nombre>
-    <descripcion>Naranja</descripcion>
-    <costo>20</costo>
-    <status>Inactivo</status>
-  </producto>
-  <producto>
-    <nombre>Patillas</nombre>
-    <descripcion>Patillas</descripcion>
-    <costo>18</costo>
-    <status>Activo</status>
+    <nombre>Cafe</nombre>
+    <descripcion>Cafe Fama de America</descripcion>
+    <costo>12</costo>
+    <imagen>cafe.jpg</imagen>
   </producto>
 </root>
+
