@@ -187,7 +187,6 @@ public class XMLInventario {
     public boolean actualizarInventario(String nombreOrig, String nombreI, String cantidadI, String stadoI, String descI, String imagI, String costI) {
         try {
             SAXBuilder builder = new SAXBuilder(false);
-            //System.out.println(usuario);
             Document doc = builder.build(nombreOrig+".xml");
             Element raiz = doc.getRootElement();
             List listaProducto = raiz.getChildren("producto");
@@ -200,6 +199,7 @@ public class XMLInventario {
                    
                     Element cantidad = e.getChild("cantidad");
                     cantidad.setText(cantidadI);
+                    
                     Element status = e.getChild("status");
                     status.setText(stadoI);
                     
