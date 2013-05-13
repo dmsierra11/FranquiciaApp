@@ -48,7 +48,6 @@ public class GestionInventario extends javax.swing.JFrame {
         if (f.exists() == true) 
                 
         {
-            System.out.println("AQUI ESTOY ");
               xml.LeerInventario(sucursal);
         }        
 else
@@ -71,7 +70,6 @@ else
         jScrollPane1 = new javax.swing.JScrollPane();
         gestor = new javax.swing.JTable();
         jBCrear = new javax.swing.JButton();
-        jBModificar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -83,7 +81,7 @@ else
 
             },
             new String [] {
-                "Nombre", "Descripcion", "Costo", "Cantidad", "Estado"
+                "Nombre", "Descripcion", "Costo", "Cantidad", "Estado", "Imagen"
             }
         ));
         jScrollPane1.setViewportView(gestor);
@@ -99,19 +97,8 @@ else
                 jBCrearActionPerformed(evt);
             }
         });
-        jBCrear.setBounds(80, 270, 170, 60);
+        jBCrear.setBounds(200, 270, 170, 60);
         jLayeredPane1.add(jBCrear, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jBModificar.setFont(new java.awt.Font("Lucida Grande", 1, 11)); // NOI18N
-        jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/edit.png"))); // NOI18N
-        jBModificar.setText("Modificar");
-        jBModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBModificarActionPerformed(evt);
-            }
-        });
-        jBModificar.setBounds(390, 270, 130, 60);
-        jLayeredPane1.add(jBModificar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/carrinho supermercado.png"))); // NOI18N
         jLabel1.setBounds(330, 0, 90, 100);
@@ -157,14 +144,6 @@ else
         }
     }//GEN-LAST:event_jBCrearActionPerformed
 
-    private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
-
-        if (this.gestor.getSelectedRow() != -1) {
-        } else {
-            JOptionPane.showMessageDialog(null, "No ha seleccionado ningun producto", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jBModificarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -209,8 +188,8 @@ else
      * @param cantidad
      * @param status
      */
-    public void agregarfila(String nombre, String descripcion, String costo, String cantidad, String status) {
-        ((DefaultTableModel) this.gestor.getModel()).addRow(new Object[]{nombre, descripcion, costo, cantidad, status});
+    public void agregarfila(String nombre, String descripcion, String costo, String cantidad, String status, String imagen) {
+        ((DefaultTableModel) this.gestor.getModel()).addRow(new Object[]{nombre, descripcion, costo, cantidad, status, imagen});
     }
 
     public ArrayList<String> getInventario() {
@@ -248,7 +227,6 @@ else
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable gestor;
     private javax.swing.JButton jBCrear;
-    private javax.swing.JButton jBModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

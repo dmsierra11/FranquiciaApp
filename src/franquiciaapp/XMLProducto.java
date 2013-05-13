@@ -29,9 +29,9 @@ public class XMLProducto {
      * @param costo
      * @return
      */
-    public static boolean agregarProducto(String nombre, String descripcion, String costo) {
+    public static boolean agregarProducto(String nombre, String descripcion, String costo, String imagen) {
         Document doc;
-        Element root, elProducto, elNombre, laDescripcion, elPrecio, elStatus;
+        Element root, elProducto, elNombre, laDescripcion, elPrecio, elStatus, laImagen;
         SAXBuilder builder = new SAXBuilder();
         try {
             doc = builder.build("listaProductos.xml");
@@ -41,7 +41,7 @@ public class XMLProducto {
             elNombre = new Element("nombre");
             laDescripcion = new Element("descripcion");
             elPrecio = new Element("costo");
-            elStatus = new Element("status");
+            laImagen = new Element("imagen");
 
             root.addContent(elProducto);
             elProducto.addContent(elNombre);
@@ -50,8 +50,8 @@ public class XMLProducto {
             laDescripcion.addContent(descripcion);
             elProducto.addContent(elPrecio);
             elPrecio.addContent(costo);
-            elProducto.addContent(elStatus);
-            elStatus.addContent("Activo");
+            elProducto.addContent(laImagen);
+            laImagen.addContent(imagen);
 
             try {
                 Format format = Format.getPrettyFormat();
@@ -103,9 +103,9 @@ public class XMLProducto {
                 Element descripcion = e.getChild("descripcion");
 
                 Element costo = e.getChild("costo");
-                Element status = e.getChild("status");
+                Element imagen = e.getChild("imagen");
                 // if (archivo.equals(user.getText())) {
-                ventana.agregarfila(nombre.getText(), descripcion.getText(), costo.getText(), costo.getText(), status.getText());
+                ventana.agregarfila(nombre.getText(), descripcion.getText(), costo.getText(), costo.getText(), imagen.getText());
                 //}
 
             }
@@ -198,7 +198,7 @@ public class XMLProducto {
      * @param costoP
      * @return
      */
-    public boolean actualizarProducto(String nombreOrig, String nombreP, String descripcionP, String costoP, String status) {
+    public boolean actualizarProducto(String nombreOrig, String nombreP, String descripcionP, String costoP, String imagenP) {
         try {
             SAXBuilder builder = new SAXBuilder(false);
             //System.out.println(usuario);
@@ -213,18 +213,14 @@ public class XMLProducto {
                 if (nombre.getText().equalsIgnoreCase(nombreOrig)) {
                     Element descripcion = e.getChild("descripcion");
                     Element costo = e.getChild("costo");
+                    Element imagen = e.getChild("imagen");
 
                     nombre.setText(nombreP);
                     descripcion.setText(descripcionP);
                     costo.setText(costoP);
+                    imagen.setText(imagenP);
 
-                    if (e.getChild("status") != null) {
-                        e.getChild("status").setText(status);
-                    } else {
-                        Element estatus = new Element("status");
-                        estatus.addContent(status);
-                        e.addContent(estatus);
-                    }
+                   
 
                     //System.out.println(descripcion.getText());
 

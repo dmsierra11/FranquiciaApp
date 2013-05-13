@@ -58,11 +58,11 @@ public class XMLInventario {
                Element node = (Element) list.get(i);
                       if (cont == 0) 
                     {
-                        crearProductoInventario(node.getChildText("nombre"), node.getChildText("descripcion"), node.getChildText("costo"), sucursal);
+                        crearProductoInventario(node.getChildText("nombre"), node.getChildText("descripcion"), node.getChildText("costo"), node.getChildText("imagen"), sucursal);
                         cont = 1;
                     } 
                       else  
-                          agregarProductoInventario(node.getChildText("nombre"), node.getChildText("descripcion"), node.getChildText("costo"), sucursal);               
+                          agregarProductoInventario(node.getChildText("nombre"), node.getChildText("descripcion"), node.getChildText("costo"), node.getChildText("imagen"), sucursal);               
             }
 
         } catch (IOException io) {
@@ -81,8 +81,8 @@ public class XMLInventario {
      * @param costo
      * @return
      */
-    public boolean crearProductoInventario(String nombre, String descripcion, String costo, String sucursal) {
-        Element elProducto, elNombre, laDescripcion, elPrecio, laCantidad, elStatus;
+    public boolean crearProductoInventario(String nombre, String descripcion, String costo, String imagenI, String sucursal) {
+        Element elProducto, elNombre, laDescripcion, elPrecio, laCantidad, elStatus, laImagen;
         SAXBuilder builder = new SAXBuilder();
         try{ 
             Element root = new Element("root");
@@ -97,6 +97,7 @@ public class XMLInventario {
             elPrecio = new Element("costo");
             laCantidad = new Element("cantidad");
             elStatus = new Element("status");
+            laImagen = new Element("imagen");
 
             root.addContent(elProducto);
             elProducto.addContent(elNombre);
@@ -109,6 +110,8 @@ public class XMLInventario {
             laCantidad.addContent("0");
              elProducto.addContent(elStatus);
             elStatus.addContent("Activo");
+             elProducto.addContent(laImagen);
+            laImagen.addContent(imagenI);
            
                 Format format = Format.getPrettyFormat();
                 /* Se genera un flujo de salida de datos XML */
@@ -286,8 +289,9 @@ public class XMLInventario {
                 Element cantidad = e.getChild("cantidad");
                 Element descripcion = e.getChild("descripcion");
                 Element status = e.getChild("status");
+                 Element imagen = e.getChild("imagen");
                 // if (archivo.equals(user.getText())) {
-                ventana.agregarfila(nombre.getText(), descripcion.getText(), costo.getText(), cantidad.getText(), status.getText());
+                ventana.agregarfila(nombre.getText(), descripcion.getText(), costo.getText(), cantidad.getText(), status.getText(), imagen.getText());
                 //}
 
             }
@@ -357,7 +361,7 @@ public class XMLInventario {
                 if (aux == false)
                 {
                     //System.out.println("dentro del if" + node.getChildText("nombre"));
-                    this.agregarProductoInventario(node.getChildText("nombre"), node.getChildText("descripcion"), node.getChildText("costo"), sucursal);
+                    this.agregarProductoInventario(node.getChildText("nombre"), node.getChildText("descripcion"), node.getChildText("costo"),node.getChildText("imagen"), sucursal);
                 }
          }
         Document doc2 = null;
@@ -400,9 +404,9 @@ public class XMLInventario {
     }
  
     
-    public boolean agregarProductoInventario(String nombre, String descripcion, String costo, String sucursal) {
+    public boolean agregarProductoInventario(String nombre, String descripcion, String costo, String imagenI, String sucursal) {
         Document doc;
-        Element root, elProducto, elNombre, laDescripcion, elPrecio, laCantidad, elStatus;
+        Element root, elProducto, elNombre, laDescripcion, elPrecio, laCantidad, elStatus, laImagen;
         SAXBuilder builder = new SAXBuilder();
         try {
             doc = builder.build(sucursal+".xml");
@@ -414,6 +418,7 @@ public class XMLInventario {
             elPrecio = new Element("costo");
             laCantidad = new Element("cantidad");
             elStatus = new Element("status");
+            laImagen = new Element("imagen");
 
             root.addContent(elProducto);
             elProducto.addContent(elNombre);
@@ -426,6 +431,8 @@ public class XMLInventario {
             laCantidad.addContent("0");
             elProducto.addContent(elStatus);
             elStatus.addContent("Activo");
+            elProducto.addContent(laImagen);
+            laImagen.addContent(imagenI);
          
 
             
