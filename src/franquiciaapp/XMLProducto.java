@@ -43,6 +43,7 @@ public class XMLProducto {
             elPrecio = new Element("costo");
             laImagen = new Element("imagen");
 
+            
             root.addContent(elProducto);
             elProducto.addContent(elNombre);
             elNombre.addContent(nombre);

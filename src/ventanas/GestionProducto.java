@@ -172,6 +172,9 @@ public class GestionProducto extends javax.swing.JFrame {
             XMLInventario xml2 = new XMLInventario("sucursal1");
              xml2.verificarInactivos("sucursal1", nombrearchivo);
              
+             XMLInventario xml3 = new XMLInventario("sucursal2");
+             xml3.verificarInactivos("sucursal2", nombrearchivo);
+             
             //replica el archivo de productos para actualizar
             Replicador replicador = new Replicador("listaProductos.xml");
             new Thread(replicador).start();
