@@ -64,21 +64,43 @@ public class Replicador implements Runnable {
 
             DataOutputStream dos = new DataOutputStream(os);
             dos.writeUTF(myFile.getName());
+            dos.writeUTF("franquicia");
             dos.writeLong(mybytearray.length);
             dos.write(mybytearray, 0, mybytearray.length);
             dos.flush();
 
             this.cliente.close();
 
-        } catch (ConnectException ce) {
+        }
+        
+        catch (java.net.NoRouteToHostException nr) {
             if (!nombreArchivo.equals("Estoy arriba")) {
-                System.out.println("No se encuentra el HOST");
-                System.out.println(this.ip);
+                System.out.println("No se encuentra el HOST" + this.ip + " " + this.puerto);
+                //System.out.println(this.ip);
                 FranquiciaApp.sinConexion = true;
                 new Historial().escribirHistorial(nombreArchivo);
             }
 
-        } catch (FileNotFoundException nf) {
+        }        
+        catch (ConnectException ce) {
+            if (!nombreArchivo.equals("Estoy arriba")) {
+                System.out.println("No se encuentra el HOST" + this.ip + " " + this.puerto);
+                //System.out.println(this.ip);
+                FranquiciaApp.sinConexion = true;
+                new Historial().escribirHistorial(nombreArchivo);
+            }
+
+        } 
+        
+        catch (java.net.SocketException nr) {
+            if (!nombreArchivo.equals("Estoy arriba")) {
+                System.out.println("No se encuentra el HOST " + this.ip + " " + this.puerto);
+                FranquiciaApp.sinConexion = true;
+                new Historial().escribirHistorial(nombreArchivo);
+            }
+        }
+        
+        catch (FileNotFoundException nf) {
             System.out.println("No se ha encontrado el archivo" + nombreArchivo);
             nf.printStackTrace();
 
@@ -96,6 +118,7 @@ public class Replicador implements Runnable {
 
             DataOutputStream dos = new DataOutputStream(os);
             dos.writeUTF("Estoy arriba");
+            dos.writeUTF("franquicia");
             dos.flush();
 
             this.cliente.close();
@@ -103,7 +126,16 @@ public class Replicador implements Runnable {
         } catch (ConnectException ce) {
             System.out.println("No se encuentra el HOST");
 
-        } catch (IOException io) {
+        } 
+        catch (java.net.SocketException nr) {
+            if (!nombreArchivo.equals("Estoy arriba")) {
+                System.out.println("No se encuentra el HOST " + this.ip + " " + this.puerto);
+                FranquiciaApp.sinConexion = true;
+                new Historial().escribirHistorial(nombreArchivo);
+            }
+        }
+        
+        catch (IOException io) {
             io.printStackTrace();
         }
     }
