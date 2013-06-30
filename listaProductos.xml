@@ -24,9 +24,87 @@
     <imagen>caraotas.jpg</imagen>
   </producto>
   <producto>
-    <nombre>Cafe</nombre>
-    <descripcion>Cafe Fama de America</descripcion>
-    <costo>30</costo>
-    <imagen>cafe.jpg</imagen>
+    <nombre>Harina</nombre>
+    <descripcion>Harina Pan</descripcion>
+    <costo>200</costo>
+    <imagen>harina.jpg</imagen>
+  </producto>
+  <producto>
+    <nombre>Azucar</nombre>
+    <descripcion>Azucar Morena</descripcion>
+    <costo>25</costo>
+    <imagen>azucar.jpg</imagen>
+  </producto>
+  <producto>
+    <nombre>gato</nombre>
+    <descripcion>gato</descripcion>
+    <costo>43</costo>
+    <imagen>asdasd</imagen>
+  </producto>
+  <producto>
+    <nombre>gato</nombre>
+    <descripcion>gato</descripcion>
+    <costo>43</costo>
+    <imagen>asdasd</imagen>
+  </producto>
+  <producto>
+    <nombre>gato</nombre>
+    <descripcion>gato</descripcion>
+    <costo>43</costo>
+    <imagen>asdasd</imagen>
+  </producto>
+  <producto>
+    <nombre>gato</nombre>
+    <descripcion>gato</descripcion>
+    <costo>43</costo>
+    <imagen>asdasd</imagen>
+  </producto>
+  <producto>
+    <nombre>gato</nombre>
+    <descripcion>gato</descripcion>
+    <costo>888</costo>
+    <imagen>asdasd</imagen>
+  </producto>
+  <producto>
+    <nombre>gato</nombre>
+    <descripcion>gato</descripcion>
+    <costo>8889</costo>
+    <imagen>asdasd</imagen>
+  </producto>
+  <producto>
+    <nombre>gato</nombre>
+    <descripcion>gato</descripcion>
+    <costo>777</costo>
+    <imagen>asdasd</imagen>
+  </producto>
+  <producto>
+    <nombre>gato</nombre>
+    <descripcion>gato</descripcion>
+    <costo>7778</costo>
+    <imagen>asdasd</imagen>
+  </producto>
+  <producto>
+    <nombre>gato</nombre>
+    <descripcion>gato</descripcion>
+    <costo>17</costo>
+    <imagen>asdasd</imagen>
+  </producto>
+  <producto>
+    <nombre>gato</nombre>
+    <descripcion>gato</descripcion>
+    <costo>1799</costo>
+    <imagen>asdasd</imagen>
+  </producto>
+  <producto>
+    <nombre>gato</nombre>
+    <descripcion>gato</descripcion>
+    <costo>1799</costo>
+    <imagen>asdasd</imagen>
+  </producto>
+  <producto>
+    <nombre>gato</nombre>
+    <descripcion>gato</descripcion>
+    <costo>1799</costo>
+    <imagen>asdasd</imagen>
   </producto>
 </root>

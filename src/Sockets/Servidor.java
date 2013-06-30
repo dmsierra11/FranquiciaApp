@@ -55,13 +55,17 @@ public class Servidor implements Runnable {
                     }
 
                 } else {
-                    System.out.println("RECIBIENDO..");
+                    System.out.println("RECIBIENDO.." + estado);
                     String fileName = estado;
                     OutputStream output = new FileOutputStream(fileName);
                     long size = in.readLong();
                     byte[] buffer = new byte[1024];
-                    while (size > 0 && (bytesRead = in.read(buffer, 0, (int) Math.min(buffer.length, size))) != -1) {
+                    while (size > 0 && (bytesRead = in.read(buffer, 0, (int) Math.min(buffer.length, size))) != -1) { 
+                        
                         output.write(buffer, 0, bytesRead);
+                        
+                        output.flush();
+                        
                         size -= bytesRead;
                     }
                     output.close();

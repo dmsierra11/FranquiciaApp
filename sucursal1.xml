@@ -5,7 +5,7 @@
     <descripcion>Paisa</descripcion>
     <costo>123</costo>
     <cantidad>100</cantidad>
-    <status>Activo</status>
+    <status>Inactivo</status>
     <imagen>queso.jpg</imagen>
   </producto>
   <producto>
@@ -44,9 +44,23 @@
     <nombre>Cafe</nombre>
     <descripcion>Cafe Fama de America</descripcion>
     <costo>30</costo>
+<<<<<<< HEAD
     <cantidad>0</cantidad>
     <status>Activo</status>
     <imagen>cafe.jpg</imagen>
+=======
+    <cantidad>200</cantidad>
+    <status>Inactivo</status>
+    <imagen>cafe.jpg</imagen>
+  </producto>
+  <producto>
+    <nombre>gato</nombre>
+    <descripcion>gato</descripcion>
+    <costo>1799</costo>
+    <cantidad>3334</cantidad>
+    <status>Activo</status>
+    <imagen>asdasd</imagen>
+>>>>>>> aad71572cc2021c516872579a9b2c88f14899f52
   </producto>
 </root>
 
