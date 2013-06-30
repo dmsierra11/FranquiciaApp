@@ -190,6 +190,7 @@ public class GestionProducto extends javax.swing.JFrame {
 
         if (this.gestor.getSelectedRow() != -1) {
             ActualizarProducto ventanaActualizar = new ActualizarProducto(this);
+            
             ventanaActualizar.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "No ha seleccionado ningun producto", "ERROR", JOptionPane.ERROR_MESSAGE);

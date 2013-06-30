@@ -9,36 +9,44 @@
     <imagen>queso.jpg</imagen>
   </producto>
   <producto>
-    <nombre>Jamon</nombre>
-    <descripcion>Plumrose</descripcion>
-    <costo>123</costo>
-    <cantidad>0</cantidad>
-    <status>Activo</status>
-    <imagen>jamon.jpg</imagen>
-  </producto>
-  <producto>
-    <nombre>Arroz</nombre>
-    <descripcion>Primor</descripcion>
-    <costo>123</costo>
-    <cantidad>0</cantidad>
-    <status>Activo</status>
-    <imagen>arroz.jpg</imagen>
-  </producto>
-  <producto>
-    <nombre>Cereal</nombre>
-    <descripcion>Chocokrispies</descripcion>
-    <costo>123</costo>
-    <cantidad>0</cantidad>
-    <status>Activo</status>
-    <imagen>cereal.jpg</imagen>
-  </producto>
-  <producto>
     <nombre>Caraotas</nombre>
-    <descripcion>Negras</descripcion>
-    <costo>123</costo>
+    <descripcion>Caraotas</descripcion>
+    <costo>100</costo>
     <cantidad>0</cantidad>
     <status>Activo</status>
     <imagen>caraotas.jpg</imagen>
+  </producto>
+  <producto>
+    <nombre>Harina</nombre>
+    <descripcion>Harina Pan</descripcion>
+    <costo>200</costo>
+    <cantidad>0</cantidad>
+    <status>Activo</status>
+    <imagen>harina.jpg</imagen>
+  </producto>
+  <producto>
+    <nombre>Azucar</nombre>
+    <descripcion>Azucar Morena</descripcion>
+    <costo>25</costo>
+    <cantidad>0</cantidad>
+    <status>Activo</status>
+    <imagen>azucar.jpg</imagen>
+  </producto>
+  <producto>
+    <nombre>Cebolla</nombre>
+    <descripcion>Cebolla</descripcion>
+    <costo>100</costo>
+    <cantidad>0</cantidad>
+    <status>Activo</status>
+    <imagen>cebolla.jpg</imagen>
+  </producto>
+  <producto>
+    <nombre>Cafe</nombre>
+    <descripcion>Cafe Fama de America</descripcion>
+    <costo>30</costo>
+    <cantidad>0</cantidad>
+    <status>Activo</status>
+    <imagen>cafe.jpg</imagen>
   </producto>
 </root>
 

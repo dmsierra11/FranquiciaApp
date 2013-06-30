@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ConnectException;
+import java.net.NoRouteToHostException;
 import java.net.Socket;
 
 /**
@@ -78,7 +79,18 @@ public class Replicador implements Runnable {
                 new Historial().escribirHistorial(nombreArchivo);
             }
 
-        } catch (FileNotFoundException nf) {
+        } 
+        
+        catch (NoRouteToHostException nr){
+            if (!nombreArchivo.equals("Estoy arriba")) {
+                System.out.println("No se encuentra el HOST");
+                System.out.println(this.ip);
+                FranquiciaApp.sinConexion = true;
+                new Historial().escribirHistorial(nombreArchivo);
+            }
+        }
+        
+        catch (FileNotFoundException nf) {
             System.out.println("No se ha encontrado el archivo" + nombreArchivo);
             nf.printStackTrace();
 
@@ -100,7 +112,16 @@ public class Replicador implements Runnable {
 
             this.cliente.close();
 
-        } catch (ConnectException ce) {
+        } catch (NoRouteToHostException nr){
+            if (!nombreArchivo.equals("Estoy arriba")) {
+                System.out.println("No se encuentra el HOST");
+                System.out.println(this.ip);
+                FranquiciaApp.sinConexion = true;
+                new Historial().escribirHistorial(nombreArchivo);
+            }
+        }
+        
+        catch (ConnectException ce) {
             System.out.println("No se encuentra el HOST");
 
         } catch (IOException io) {
